@@ -303,6 +303,7 @@ body {
 	z-index: 1;
 	display: flex;
 	flex-direction: row;
+	font-family: 'Jost', Cantarell, Helvetica Neue, Helvetica, Arial, sans-serif;
 }
 
 .menu-bar {
@@ -368,21 +369,20 @@ div.content {
 
 .inner-flex button.button {
 	display: flex;
-	align-items: center;
 	justify-content: space-between;
-	font-family: 'Cabin', Cantarell, Helvetica Neue, Helvetica, Arial, sans-serif;
+	font-family: 'IBM Plex Sans Condensed', Cantarell, Helvetica Neue, Helvetica, Arial, sans-serif;
 	font-size: 1.4em;
 	font-weight: 700;
 	color: var(--text-primary);
 	background: var(--buttons);
 	width: 85%;
-	height: 80%;
-	padding: 10px;
-	margin: 5% 5% 0% 15%;
+	height: 175px;
+	padding: 5px;
+	margin: 5% 5% 5% 15%;
 	cursor: pointer;
 	border: 1.5px var(--borders) solid;
-	border-radius: 15px;
-	box-shadow: 0px 4px 12px var(--shadow);
+	border-radius: 40px;
+	box-shadow: 5px 5px 12px var(--shadow);
 	transition: all 0.4s ease 0s;
 	pointer-events: auto;
 }
@@ -391,23 +391,21 @@ div.content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
+	text-align: center;
     width: 100%;
-	padding: 10% 5% 5% 5%;
+	padding: 5%;
 }
 
 .algo-name {
-    text-align: center;
     width: 100%;
+	padding-bottom: 0px;
     display: flex;
     justify-content: center;
 }
 
 .algo-picture {
-	width: 90%;
-	height: auto;
-	margin: 5%;
-	scale: 0.8;
+	width: 80%;
+	padding: 5%;
 }
 .algo-picture img {
 	width: 100%;
@@ -463,16 +461,16 @@ div.content {
 	color: white;
 	border-radius: 15px;
 	padding: 5px 10px 5px 10px;
-	box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
+	box-shadow: 0px 8px 15px rgba(255, 137, 137, 0.5);
 }
 
 .dsa-filter {
 	width: 90%;
 	display: block;
 	margin: 5% auto;
-	font-size: 1em;
+	font-size: 1.2em;
 	padding: 0.8rem 1rem;
-	border-radius: 15px;
+	border-radius: 40px;
 	background-color: var(--background);
 	color: var(--buttons);
 }
@@ -490,16 +488,15 @@ input::placeholder {
 .side-panel {
 	align-items: center;
 	justify-content: center;
-	font-family: 'Cabin', Cantarell, Helvetica Neue, Helvetica, Arial, sans-serif;
-	font-size: 1.2em;
 	font-weight: 700;
 	background: var(--buttons);
 	width: 25%;
 	padding: 5px;
-	margin: 15px;
+	padding-bottom: 15px;
+	margin-top: 30px;
 	border: 1.5px var(--borders) solid;
-	border-radius: 15px;
-	box-shadow: 0px 4px 12px var(--shadow);
+	border-radius: 40px;
+	box-shadow: 5px 12px 12px var(--shadow);
 	transition: all 0.4s ease 0s;
 	pointer-events: auto;
 }
@@ -508,26 +505,19 @@ input::placeholder {
 	display: block;
 	align-items: center;
 	justify-content: space-between;
-	font-family: 'Cabin', Cantarell, Helvetica Neue, Helvetica, Arial, sans-serif;
 	cursor: pointer;
+	font-family: 'IBM Plex Sans Condensed', Cantarell, Helvetica Neue, Helvetica, Arial, sans-serif;
 	color: var(--text-primary);
-	font-size: 1em;
+	font-size: 26px;
 	margin: auto;
-	padding: 5%;
+	padding: 3%;
 	background-color: var(--buttons);
 	border: var(--buttons);
 }
 
 .Side-Buttons button:hover {
-	display: block;
-	align-items: center;
-	justify-content: space-between;
-	font-family: 'Cabin', Cantarell, Helvetica Neue, Helvetica, Arial, sans-serif;
 	cursor: pointer;
 	color: var(--hover-text);
-	font-size: 1em;
-	margin: auto;
-	padding: 5%;
 	background-color: var(--buttons);
 	border: var(--buttons);
 }

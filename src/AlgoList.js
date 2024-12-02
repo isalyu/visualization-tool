@@ -141,27 +141,27 @@ export const algoFilter = [
 	},
 	{
 		id: 'BST',
-		category: 'Trees',
+		category: 'Trees and SkipList',
 	},
 	{
 		id: 'Heap',
-		category: 'Trees',
+		category: 'Trees and SkipList',
 	},
 	{
 		id: 'AVL',
-		category: 'Trees',
+		category: 'Trees and SkipList',
 	},
 	{
 		id: 'BTree',
-		category: 'Trees',
+		category: 'Trees and SkipList',
 	},
 	{
 		id: 'SplayTree',
-		category: 'Trees',
+		category: 'Trees and SkipList',
 	},
 	{
 		id: 'SkipList',
-		category: 'SkipList',
+		category: 'Trees and SkipList',
 	},
 	{
 		id: 'OpenHash',
@@ -221,23 +221,23 @@ export const algoFilter = [
 	},
 	{
 		id: 'BFS',
-		category: 'Graph Algoritms',
+		category: 'Graph Algorithms',
 	},
 	{
 		id: 'DFS',
-		category: 'Graph Algoritms',
+		category: 'Graph Algorithms',
 	},
 	{
 		id: 'Dijkstra',
-		category: 'Graph Algoritms',
+		category: 'Graph Algorithms',
 	},
 	{
 		id: 'Prim',
-		category: 'Graph Algoritms',
+		category: 'Graph Algorithms',
 	},
 	{
-		id: 'Krusal',
-		category: 'Graph Algoritms',
+		id: 'Kruskal',
+		category: 'Graph Algorithms',
 	},
 	{
 		id: 'LCS',
