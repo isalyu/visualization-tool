@@ -3,7 +3,6 @@ import { Link, Route, Switch } from 'react-router-dom';
 import React, { useState } from 'react';
 import { algoFilter, algoList, algoMap } from '../AlgoList';
 import AboutScreen from './AboutScreen';
-import { DiCodeBadge } from 'react-icons/di';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 
