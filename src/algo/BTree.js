@@ -217,9 +217,22 @@ export default class BTree extends Algorithm {
 	}
 
 	setURLData(searchParams) {
-		const data = searchParams.get("data");
-		this.buildTreeField.value = data;
-		this.buildTreeCallback();
+		if (searchParams.has("predSucc")) {
+			const selection = searchParams.get("predSucc");
+			if (selection === "pred") {
+				this.predSucc = 'pred'
+				this.predButton.checked = true;
+			} else if (selection === "succ") {
+				this.predSucc = 'succ'
+				this.succButton.checked = true;
+			}
+		}
+
+		if (searchParams.has("data")) {
+			const data = searchParams.get("data");
+			this.buildTreeField.value = data;
+			this.buildTreeCallback();
+		}
 	}
 
 	buildTreeCallback() {
