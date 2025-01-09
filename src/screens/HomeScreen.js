@@ -14,7 +14,7 @@ function SideButton({ button, filter }) {
 		<div className="Side-Buttons">
 			{button.map((cat, i) => {
 				return (
-					<button type="button" onClick={() => filter(cat)} className="btn">
+					<button type="button" key={i} onClick={() => filter(cat)} className="btn">
 						{cat}
 					</button>
 				);
@@ -45,7 +45,7 @@ function SearchFilter({ filteredAlgoList }) {
 									: {}
 							}
 						>
-							<div class="algo-container">
+							<div className="algo-container">
 								<div className="algo-name">{algoMap[name][0]}</div>
 								{algoMap[name][0] && (
 									<div className="algo-picture">
