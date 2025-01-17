@@ -246,6 +246,16 @@ const Modals = {
 			<li>The maximum option selects the largest number to swap with.</li>
 		</ul>
 	),
+	SplayTree: (
+		<ul>
+			<li>
+				SplayTrees are optimized for frequently accessing the same subset of elements.
+				After an operation on an element, the element is moved to the root of the tree.
+				This allows for faster access next time this element is searched for, and frequently-
+				searched elements will tend to be towards the top of the tree.
+			</li>
+		</ul>
+	),
 	RabinKarp: (
 		<ul>
 			<li>The base value is initially set to 1.</li>
