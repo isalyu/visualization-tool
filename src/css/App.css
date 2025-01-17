@@ -485,7 +485,15 @@ input::placeholder {
 	font-size: 1.5em;
 }
 
+.side-panel-cont {
+	width: 100%;
+	z-index: 1;
+	margin-top: 30px;
+}
+
 .side-panel {
+	position: sticky;
+	top: 100;
 	align-items: center;
 	justify-content: center;
 	font-weight: 700;
@@ -493,7 +501,6 @@ input::placeholder {
 	width: 25%;
 	padding: 5px;
 	padding-bottom: 15px;
-	margin-top: 30px;
 	border: 1.5px var(--borders) solid;
 	border-radius: 40px;
 	box-shadow: 5px 12px 12px var(--shadow);
