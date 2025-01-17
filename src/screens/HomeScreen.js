@@ -52,7 +52,14 @@ function SearchFilter({ filteredAlgoList }) {
 										<img
 											alt={algoMap[name][0]}
 											src={`./algo_buttons/${algoMap[name][0]}.png`}
-											onError={(e) => (e.target.style.display = 'none')}
+											onError = {(e) => {
+												const currentSrc = e.target.src;
+												if (currentSrc.endsWith('.png')) {
+													e.target.src = `./algo_buttons/${algoMap[name][0]}.gif`;
+												} else if (currentSrc.endsWith('.gif')) {
+													e.target.style.display = 'none';
+												}
+											}}
 										/>
 									</div>
 								)}

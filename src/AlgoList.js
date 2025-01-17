@@ -29,7 +29,7 @@ export const algoMap = {
 	InsertionSort: ['Insertion Sort', algos.InsertionSort, true],
 	SelectionSort: ['Selection Sort', algos.SelectionSort, true],
 	Quicksort: ['Quicksort', algos.Quicksort, true],
-	Quickselect: ['Quick / kᵗʰ Select', algos.Quickselect, true],
+	Quickselect: ['Quick Select (kᵗʰ Select)', algos.Quickselect, true],
 	MergeSort: ['MergeSort', algos.MergeSort, true],
 	LSDRadix: ['LSD Radix Sort', algos.LSDRadix, true],
 	HeapSort: ['HeapSort', algos.HeapSort, true],
@@ -184,11 +184,11 @@ export const algoFilter = [
 		category: 'Sorting and Quick Select',
 	},
 	{
-		id: 'QuickSort',
+		id: 'Quicksort',
 		category: 'Sorting and Quick Select',
 	},
 	{
-		id: 'QuickSelect',
+		id: 'Quickselect',
 		category: 'Sorting and Quick Select',
 	},
 	{
