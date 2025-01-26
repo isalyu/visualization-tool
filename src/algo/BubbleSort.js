@@ -101,7 +101,7 @@ export default class BubbleSort extends Algorithm {
 			],
 			'Example',
 		);
-		this.exampleDropdown.onclick = this.exampleCallback.bind(this);
+		this.exampleDropdown.onchange = this.exampleCallback.bind(this);
 		this.controls.push(this.exampleDropdown);
 
 		// Clear button
@@ -180,6 +180,7 @@ export default class BubbleSort extends Algorithm {
 
 	exampleCallback() {
 		const selection = this.exampleDropdown.value;
+		this.exampleDropdown.options[0].text = this.exampleDropdown.options[this.exampleDropdown.selectedIndex].text;
 		if (!selection) {
 			return;
 		}
