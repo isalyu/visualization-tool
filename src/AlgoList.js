@@ -37,7 +37,7 @@ export const algoMap = {
 	BoyerMoore: ['Boyer-Moore', algos.BoyerMoore, true],
 	KMP: ['KMP', algos.KMP, true],
 	RabinKarp: ['Rabin-Karp', algos.RabinKarp, true],
-	CreateGraph: ['Graph Adjacency List', algos.CreateGraph, true],
+	CreateGraph: ['Graph Representations', algos.CreateGraph, true],
 	BFS: ['Breadth-First Search', algos.BFS, true],
 	DFS: ['Depth-First Search', algos.DFS, true],
 	Dijkstra: ["Dijkstra's", algos.Dijkstras, true],
