@@ -207,9 +207,9 @@ em {
 
 .bigo th,
 .bigo td {
+	color: var(--primary);
 	padding: 5px;
 	min-width: 50px;
-	color: black;
 	border: 1px solid gray; /* Adds border to table cells */
 }
 

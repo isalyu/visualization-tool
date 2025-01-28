@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import timeComplexities from '../time_complexities.json';
 
+let blurEnabled = true;
+
 const applyEquationClass = (text, force) => {
 	const regex = /\$(.*?)\$/g;
 	return text.split(regex).map((part, index) =>
@@ -51,7 +53,7 @@ const ToggleBlurCell = ({ text }) => {
 	return (
 		<td
 			style={{ width: '16%' }}
-			className={isBlurred ? 'blur' : ''}
+			className={isBlurred ? 'blur big_o_cell' : 'big_o_cell'}
 			onMouseEnter={handleMouseEnter}
 		>
 			{applyEquationClass(text, true)}
@@ -60,18 +62,29 @@ const ToggleBlurCell = ({ text }) => {
 };
 
 // Function to unblur all cells with the blur class
-function unblurAll() {
-	const blurredElements = document.querySelectorAll('.blur');
-	blurredElements.forEach(element => {
-		element.classList.remove('blur');
-	});
+function toggleBlur() {
+	blurEnabled = !blurEnabled;
+	const cellElements = document.querySelectorAll('.big_o_cell');
+	if (!blurEnabled) {
+		cellElements.forEach(element => {
+			element.classList.remove('blur');
+		});
+		const button = document.querySelector('.button-container button');
+		button.textContent = 'Hide All Big-O';
+	} else {
+		cellElements.forEach(element => {
+			element.classList.add('blur');
+		});
+		const button = document.querySelector('.button-container button');
+		button.textContent = 'Reveal All Big-O';
+	}
 }
 
 const Modals = page => {
 	return timeComplexities[page] ? (
 		<div>
 			<div className="button-container">
-				<button onClick={unblurAll}>Reveal All Big-O</button>
+				<button onClick={toggleBlur}>Reveal All Big-O</button>
 			</div>
 			{renderRows(timeComplexities[page])}
 		</div>
