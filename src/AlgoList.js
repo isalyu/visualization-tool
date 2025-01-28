@@ -17,7 +17,7 @@ export const algoMap = {
 	DequeArray: ['Deque (Array)', algos.DequeArray, true],
 	DequeLL: ['Deque (LinkedList)', algos.DequeLL],
 	BST: ['Binary Search Tree', algos.BST, true],
-	Heap: ['Heap / PriorityQueue', algos.Heap],
+	Heap: ['Heap (PriorityQueue)', algos.Heap],
 	SkipList: ['SkipList', algos.SkipList],
 	OpenHash: ['HashMap (Probing)', algos.OpenHash],
 	ClosedHash: ['HashMap (Chaining)', algos.ClosedHash],
@@ -29,7 +29,7 @@ export const algoMap = {
 	InsertionSort: ['Insertion Sort', algos.InsertionSort, true],
 	SelectionSort: ['Selection Sort', algos.SelectionSort, true],
 	Quicksort: ['Quicksort', algos.Quicksort, true],
-	Quickselect: ['Quick / kᵗʰ Select', algos.Quickselect, true],
+	Quickselect: ['Quick Select (kᵗʰ Select)', algos.Quickselect, true],
 	MergeSort: ['MergeSort', algos.MergeSort, true],
 	LSDRadix: ['LSD Radix Sort', algos.LSDRadix, true],
 	HeapSort: ['HeapSort', algos.HeapSort, true],
@@ -168,3 +168,154 @@ export const relatedSearches = {
 	LCS: ['Floyd'],
 	Floyd: ['LCS'],
 };
+
+export const algoFilter = [
+	{
+		id: 'ArrayList',
+		category: 'Lists',
+	},
+	{
+		id: 'LinkedList',
+		category: 'Lists',
+	},
+	{
+		id: 'DoublyLinkedList',
+		category: 'Lists',
+	},
+	{
+		id: 'CircularlyLinkedList',
+		category: 'Lists',
+	},
+	{
+		id: 'StackArray',
+		category: 'Linear Data Structures',
+	},
+	{
+		id: 'StackLL',
+		category: 'Linear Data Structures',
+	},
+	{
+		id: 'QueueArray',
+		category: 'Linear Data Structures',
+	},
+	{
+		id: 'QueueLL',
+		category: 'Linear Data Structures',
+	},
+	{
+		id: 'DequeArray',
+		category: 'Linear Data Structures',
+	},
+	{
+		id: 'DequeLL',
+		category: 'Linear Data Structures',
+	},
+	{
+		id: 'BST',
+		category: 'Trees and SkipList',
+	},
+	{
+		id: 'Heap',
+		category: 'Trees and SkipList',
+	},
+	{
+		id: 'AVL',
+		category: 'Trees and SkipList',
+	},
+	{
+		id: 'BTree',
+		category: 'Trees and SkipList',
+	},
+	{
+		id: 'SplayTree',
+		category: 'Trees and SkipList',
+	},
+	{
+		id: 'SkipList',
+		category: 'Trees and SkipList',
+	},
+	{
+		id: 'OpenHash',
+		category: 'Hashmaps',
+	},
+	{
+		id: 'ClosedHash',
+		category: 'Hashmaps',
+	},
+	{
+		id: 'BubbleSort',
+		category: 'Sorting and Quick Select',
+	},
+	{
+		id: 'CocktailSort',
+		category: 'Sorting and Quick Select',
+	},
+	{
+		id: 'InsertionSort',
+		category: 'Sorting and Quick Select',
+	},
+	{
+		id: 'Quicksort',
+		category: 'Sorting and Quick Select',
+	},
+	{
+		id: 'Quickselect',
+		category: 'Sorting and Quick Select',
+	},
+	{
+		id: 'MergeSort',
+		category: 'Sorting and Quick Select',
+	},
+	{
+		id: 'LSDRadix',
+		category: 'Sorting and Quick Select',
+	},
+	{
+		id: 'HeapSort',
+		category: 'Sorting and Quick Select',
+	},
+	{
+		id: 'BruteForce',
+		category: 'Pattern Matching',
+	},
+	{
+		id: 'BoyerMoore',
+		category: 'Pattern Matching',
+	},
+	{
+		id: 'KMP',
+		category: 'Pattern Matching',
+	},
+	{
+		id: 'RabinKarp',
+		category: 'Pattern Matching',
+	},
+	{
+		id: 'BFS',
+		category: 'Graph Algorithms',
+	},
+	{
+		id: 'DFS',
+		category: 'Graph Algorithms',
+	},
+	{
+		id: 'Dijkstra',
+		category: 'Graph Algorithms',
+	},
+	{
+		id: 'Prim',
+		category: 'Graph Algorithms',
+	},
+	{
+		id: 'Kruskal',
+		category: 'Graph Algorithms',
+	},
+	{
+		id: 'LCS',
+		category: 'Dynamic Programming',
+	},
+	{
+		id: 'Floyd',
+		category: 'Dynamic Programming',
+	},
+];
