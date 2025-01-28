@@ -1,7 +1,7 @@
 import '../css/App.css';
 import { Link, Route, Switch } from 'react-router-dom';
-import React, { useState } from 'react';
-import { algoFilter, algoList, algoMap } from '../AlgoList';
+import React, { useMemo, useState } from 'react';
+import { algoFilter, algoList, algoMap, relatedSearches } from '../AlgoList';
 import AboutScreen from './AboutScreen';
 import Footer from '../components/Footer';
 import Header from '../components/Header';

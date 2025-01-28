@@ -67,7 +67,7 @@ export default class CocktailSort extends Algorithm {
 		const verticalGroup = addGroupToAlgorithmBar(false);
 
 		addLabelToAlgorithmBar(
-			'Comma seperated list (e.g. "3,1,2"). Max 18 elements & no elements > 999',
+			'Comma separated list (e.g. "3,1,2"). Max 18 elements & no elements > 999',
 			verticalGroup,
 		);
 
@@ -101,7 +101,7 @@ export default class CocktailSort extends Algorithm {
 			],
 			'Example',
 		);
-		this.exampleDropdown.onclick = this.exampleCallback.bind(this);
+		this.exampleDropdown.onchange = this.exampleCallback.bind(this);
 		this.controls.push(this.exampleDropdown);
 
 		// Clear button
@@ -115,6 +115,12 @@ export default class CocktailSort extends Algorithm {
 		this.lastSwapCheckbox = addCheckboxToAlgorithmBar('Enable last swap optimization', true);
 		this.lastSwapCheckbox.onclick = this.toggleLastSwap.bind(this);
 		this.controls.push(this.lastSwapCheckbox);
+	}
+
+	setURLData(searchParams) {
+		const data = searchParams.get('data');
+		this.listField.value = data;
+		this.sortCallback();
 	}
 
 	setup() {
@@ -180,6 +186,7 @@ export default class CocktailSort extends Algorithm {
 
 	exampleCallback() {
 		const selection = this.exampleDropdown.value;
+		this.exampleDropdown.options[0].text = this.exampleDropdown.options[this.exampleDropdown.selectedIndex].text;
 		if (!selection) {
 			return;
 		}

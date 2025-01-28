@@ -75,7 +75,7 @@ export default class LSDRadix extends Algorithm {
 		const verticalGroup = addGroupToAlgorithmBar(false);
 
 		addLabelToAlgorithmBar(
-			'Comma seperated list (e.g. "3,1,2"). Max 18 elements & no elements > 6 digits.',
+			'Comma separated list (e.g. "3,1,2"). Max 18 elements & no elements > 6 digits.',
 			verticalGroup,
 		);
 
@@ -109,7 +109,7 @@ export default class LSDRadix extends Algorithm {
 			],
 			'Example',
 		);
-		this.exampleDropdown.onclick = this.exampleCallback.bind(this);
+		this.exampleDropdown.onchange = this.exampleCallback.bind(this);
 		this.controls.push(this.exampleDropdown);
 
 		// Clear button
@@ -123,6 +123,12 @@ export default class LSDRadix extends Algorithm {
 		this.negativeNumbersCheckbox = addCheckboxToAlgorithmBar('Sort negative numbers', false);
 		this.negativeNumbersCheckbox.onclick = this.toggleNegativeNumbers.bind(this);
 		this.controls.push(this.negativeNumbersCheckbox);
+	}
+
+	setURLData(searchParams) {
+		const data = searchParams.get('data');
+		this.listField.value = data;
+		this.sortCallback();
 	}
 
 	setup() {
@@ -171,6 +177,7 @@ export default class LSDRadix extends Algorithm {
 
 	exampleCallback() {
 		const selection = this.exampleDropdown.value;
+		this.exampleDropdown.options[0].text = this.exampleDropdown.options[this.exampleDropdown.selectedIndex].text;
 		if (!selection) {
 			return;
 		}

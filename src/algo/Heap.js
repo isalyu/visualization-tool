@@ -183,6 +183,12 @@ export default class Heap extends Algorithm {
 		return this.commands;
 	}
 
+	setURLData(searchParams) {
+		const data = searchParams.get('data');
+		this.buildHeapField.value = data;
+		this.buildHeapCallback();
+	}
+
 	setup() {
 		this.swapLabel1 = this.nextIndex++;
 		this.swapLabel2 = this.nextIndex++;
