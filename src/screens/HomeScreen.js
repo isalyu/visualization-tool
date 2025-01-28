@@ -1,5 +1,5 @@
 import '../css/App.css';
-import { Link, Route, Switch } from 'react-router-dom';
+import { Link, Route, Routes } from 'react-router-dom';
 import React, { useMemo, useState } from 'react';
 import { algoFilter, algoList, algoMap, relatedSearches } from '../AlgoList';
 import AboutScreen from './AboutScreen';
@@ -8,6 +8,7 @@ import Header from '../components/Header';
 
 /* Side Panel Buttons */
 const allCategories = ['All', ...new Set(algoFilter.map(item => item.category))];
+
 
 function SideButton({ button, filter }) {
 	return (
@@ -97,6 +98,7 @@ const HomeScreen = ({ theme, toggleTheme }) => {
 	const [filterList, setFilteredList] = useState(algoList);
 
 	const filteredAlgoList = filterList.filter(name => {
+		console.log(relatedSearchesList());
 		if (dsaFilter) {
 			return (
 				algoMap[name] &&
@@ -106,6 +108,23 @@ const HomeScreen = ({ theme, toggleTheme }) => {
 		}
 		return true;
 	});
+
+	const relatedSearchesList = useMemo(() => {
+		const relatedSet = new Set();
+
+		if (dsaFilter) {
+			filteredAlgoList.forEach(name => {
+				const related = relatedSearches[name];
+				related.forEach(algo => {
+					if (!filteredAlgoList.includes(algo)) {
+						relatedSet.add(algo);
+					}
+				});
+			});
+		}
+
+		return ['Related Pages', ...Array.from(relatedSet)];
+	}, [filteredAlgoList, dsaFilter]);
 
 	/* Side Panel Functionality */
 	const [sideButtons] = useState(allCategories);
@@ -126,32 +145,34 @@ const HomeScreen = ({ theme, toggleTheme }) => {
 		<div className="container">
 			<Header theme={theme} toggleTheme={toggleTheme} />
 			<div className="content">
-				<Switch>
-					<Route exact path="/">
-						{/* <FinalsBanner></FinalsBanner> */}
-						<div className="outer-flex">
-							{/* Side Navigator*/}
-							<div className="side-panel">
-								{/* Search Bar */}
-								<input
-									className="dsa-filter"
-									placeholder="Search..."
-									type="search"
-									onChange={e => setDsaFilter(e.target.value)}
-								/>
-								<SideButton button={sideButtons} filter={sidefilter} />
-							</div>
+				<Routes>
+					<Route
+						path="/"
+						element={
+							<>
+								{/* <FinalsBanner></FinalsBanner> */}
+								<div className="outer-flex">
+									{/* Side Navigator*/}
+									<div className="side-panel">
+										{/* Search Bar */}
+										<input
+											className="dsa-filter"
+											placeholder="Search..."
+											type="search"
+											onChange={e => setDsaFilter(e.target.value)}
+										/>
+										<SideButton button={sideButtons} filter={sidefilter} />
+									</div>
 
-							<div className="inner-flex">
-								<SearchFilter filteredAlgoList={filteredAlgoList} />
-							</div>
-						</div>
-					</Route>
-					<Route path="/about">
-						{' '}
-						<AboutScreen />{' '}
-					</Route>
-				</Switch>
+									<div className="inner-flex">
+										<SearchFilter filteredAlgoList={filteredAlgoList} />
+									</div>
+								</div>
+							</>
+						}
+					/>
+					<Route path="/about" element={<AboutScreen />} />
+				</Routes>
 			</div>
 			<Footer />
 		</div>
