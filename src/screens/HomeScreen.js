@@ -1,7 +1,7 @@
 import '../css/App.css';
 import { Link, Route, Routes } from 'react-router-dom';
-import React, { useMemo, useState } from 'react';
-import { algoFilter, algoList, algoMap, relatedSearches } from '../AlgoList';
+import React, { useState } from 'react';
+import { algoFilter, algoList, algoMap } from '../AlgoList';
 import AboutScreen from './AboutScreen';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
@@ -98,7 +98,6 @@ const HomeScreen = ({ theme, toggleTheme }) => {
 	const [filterList, setFilteredList] = useState(algoList);
 
 	const filteredAlgoList = filterList.filter(name => {
-		console.log(relatedSearchesList());
 		if (dsaFilter) {
 			return (
 				algoMap[name] &&
@@ -109,22 +108,22 @@ const HomeScreen = ({ theme, toggleTheme }) => {
 		return true;
 	});
 
-	const relatedSearchesList = useMemo(() => {
-		const relatedSet = new Set();
+	// const relatedSearchesList = useMemo(() => {
+	// 	const relatedSet = new Set();
 
-		if (dsaFilter) {
-			filteredAlgoList.forEach(name => {
-				const related = relatedSearches[name];
-				related.forEach(algo => {
-					if (!filteredAlgoList.includes(algo)) {
-						relatedSet.add(algo);
-					}
-				});
-			});
-		}
+	// 	if (dsaFilter) {
+	// 		filteredAlgoList.forEach(name => {
+	// 			const related = relatedSearches[name];
+	// 			related.forEach(algo => {
+	// 				if (!filteredAlgoList.includes(algo)) {
+	// 					relatedSet.add(algo);
+	// 				}
+	// 			});
+	// 		});
+	// 	}
 
-		return ['Related Pages', ...Array.from(relatedSet)];
-	}, [filteredAlgoList, dsaFilter]);
+	// 	return ['Related Pages', ...Array.from(relatedSet)];
+	// }, [filteredAlgoList, dsaFilter]);
 
 	/* Side Panel Functionality */
 	const [sideButtons] = useState(allCategories);
@@ -147,7 +146,7 @@ const HomeScreen = ({ theme, toggleTheme }) => {
 			<div className="content">
 				<Routes>
 					<Route
-						path="/"
+						path="*"
 						element={
 							<>
 								{/* <FinalsBanner></FinalsBanner> */}
