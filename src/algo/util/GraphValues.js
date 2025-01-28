@@ -432,6 +432,7 @@ const BFS_DFS_ADJ_LIST =
 		/*H*/ [0, 0, 0, 0, 0, 0, 1, 0],
 	].map(row => row.map(x => x || -1)); // Turn 0s to -1s
 
+
 // Dijkstra's
 
 const DIJKSTRAS_ADJ_LIST =
@@ -464,6 +465,17 @@ const PRIMS_KRUSKALS_ADJ_LIST =
 
 // Color coding for Disjoint Set in Kruskal's
 
+const FLOYD_ADJ_LIST = [
+	[-1, 8, -1, -1, 6, -1, -1, -1],
+	[8, -1, -1, -1, -1, -1, -1, -1],
+	[-1, -1, -1, -1, -1, -1, -1, -1],
+	[-1, -1, -1, -1, -1, 3, -1, -1],
+	[6, -1, -1, -1, -1, -1, -1, 4],
+	[-1, -1, -1, 3, -1, -1, 7, 9],
+	[-1, -1, -1, -1, -1, 7, -1, 6],
+	[-1, -1, -1, -1, 4, 9, 6, -1],
+];
+
 const KRUSKALS_DS_COLORS = [
 	'#9b9bd4',
 	'#6aaf6a',
@@ -488,4 +500,5 @@ export {
 	DIJKSTRAS_ADJ_LIST,
 	PRIMS_KRUSKALS_ADJ_LIST,
 	KRUSKALS_DS_COLORS,
+	FLOYD_ADJ_LIST,
 };

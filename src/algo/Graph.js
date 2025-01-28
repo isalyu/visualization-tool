@@ -33,6 +33,7 @@ import Algorithm, {
 	addRadioButtonGroupToAlgorithmBar,
 } from './Algorithm.js';
 import {
+	FLOYD_ADJ_LIST,
 	LARGE_ALLOWED,
 	LARGE_CURVE,
 	LARGE_X_POS_LOGICAL,
@@ -401,6 +402,11 @@ export default class Graph extends Algorithm {
 	setup(adj_matrix) {
 		this.commands = [];
 		this.circleID = new Array(this.size);
+
+		if (!adj_matrix) {
+			adj_matrix = FLOYD_ADJ_LIST;
+		}
+
 		for (let i = 0; i < this.size; i++) {
 			if (adj_matrix && adj_matrix[i].some(value => value !== -1)) {
 				// Only create a circle if the row has non-zero values
