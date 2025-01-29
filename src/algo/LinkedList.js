@@ -247,7 +247,7 @@ export default class LinkedList extends Algorithm {
 
 	setURLData(searchParams) {
 		this.implementAction(this.clearAll.bind(this));
-		
+	
 		if (searchParams.has("tail")) {
 			const tail = searchParams.get("tail");
 			if (tail === "1") {
@@ -265,7 +265,6 @@ export default class LinkedList extends Algorithm {
 			});
 		}
 	}
-
 
 	setup() {
 		this.linkedListElemID = new Array(SIZE);

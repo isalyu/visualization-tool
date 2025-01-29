@@ -80,9 +80,9 @@ const Modals = {
 			<li>The best case is when we have a sorted array (terminates if no swaps are made)</li>
 			<li>
 				The worst case is when we have a reverse sorted array (we perform
-				<p className="equation">
-					n + (n - 1) + (n - 2) + ... = n<sup>2</sup>
-				</p>
+				<span className="equation">
+					n + (n - 1) + (n - 2) + ... = n<suspan>2</suspan>
+				</span>
 				comparisons)
 			</li>
 		</ul>
@@ -92,12 +92,12 @@ const Modals = {
 			<li>This is a singly circular LinkedList with no tail.</li>
 			<li>
 				Adding to the front, adding to the back, and removing from the front can all be done
-				in <text className="equation">O(1)</text> using data movement tricks and pointer
+				in <span className="equation">O(1)</span> using data movement tricks and pointer
 				manipulation.
 			</li>
 			<li>
 				Removing from the back requires a traversal to the node before the last node making
-				it <text className="equation">O(n)</text>
+				it <span className="equation">O(n)</span>
 			</li>
 		</ul>
 	),
@@ -120,9 +120,9 @@ const Modals = {
 			<li>The best case is when we have a sorted array (terminates if no swaps are made)</li>
 			<li>
 				The worst case is when we have a reverse sorted array (we perform
-				<p className="equation">
-					n + (n - 1) + (n - 2) + ... = n<sup>2</sup>
-				</p>
+				<span className="equation">
+					n + (n - 1) + (n - 2) + ... = n<suspan>2</suspan>
+				</span>
 				comparisons)
 			</li>
 			<li>
@@ -142,7 +142,7 @@ const Modals = {
 			</li>
 			<li>
 				Since this is a DLL with a tail, all operations acting at the front and back of the
-				list are <text className="equation">O(1)</text>
+				list are <span className="equation">O(1)</span>
 			</li>
 		</ul>
 	),
@@ -151,9 +151,9 @@ const Modals = {
 			<li>The best case is when we have a sorted array (terminates if no swaps are made)</li>
 			<li>
 				The worst case is when we have a reverse sorted array (we perform
-				<p className="equation">
-					n + (n - 1) + (n - 2) + ... = n<sup>2</sup>
-				</p>
+				<span className="equation">
+					n + (n - 1) + (n - 2) + ... = n<suspan>2</suspan>
+				</span>
 				comparisons)
 			</li>
 		</ul>
@@ -194,14 +194,14 @@ const Modals = {
 			</li>
 			<li>
 				LinkedLists are designed to operate at the head. So all operations acting at the
-				front are <text className="equation">O(1).</text>
+				front are <span className="equation">O(1).</span>
 			</li>
 			<li>
-				Without the tail, adding to the back is <text className="equation">O(n)</text> since
+				Without the tail, adding to the back is <span className="equation">O(n)</span> since
 				we must traverse from the head to the last node.
 			</li>
 			<li>
-				With the tail, adding to the back becomes <text className="equation">O(1)</text>{' '}
+				With the tail, adding to the back becomes <span className="equation">O(1)</span>{' '}
 				since we can set the next pointer of the tail to the new node and then have the tail
 				point to the new node.
 			</li>
@@ -244,6 +244,16 @@ const Modals = {
 		<ul>
 			<li>The minimum option selects the smallest number to swap with.</li>
 			<li>The maximum option selects the largest number to swap with.</li>
+		</ul>
+	),
+	SplayTree: (
+		<ul>
+			<li>
+				SplayTrees are optimized for frequently accessing the same subset of elements.
+				After an operation on an element, the element is moved to the root of the tree.
+				This allows for faster access next time this element is searched for, and frequently-
+				searched elements will tend to be towards the top of the tree.
+			</li>
 		</ul>
 	),
 	RabinKarp: (

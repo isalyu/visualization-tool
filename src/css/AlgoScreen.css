@@ -202,14 +202,14 @@ em {
 .VisualizationMainPage .bigo {
 	border-collapse: collapse; /* Ensures borders are not doubled */
 	position: absolute;
-	min-width: 35%;
+	min-width: 40%;
 }
 
 .bigo th,
 .bigo td {
+	color: var(--primary);
 	padding: 5px;
 	min-width: 50px;
-	color: black;
 	border: 1px solid gray; /* Adds border to table cells */
 }
 

@@ -182,7 +182,7 @@ export default class Heap extends Algorithm {
 		this.cmd(act.setText, this.arrayRects[0], 'null');
 		return this.commands;
 	}
-	
+
 	setURLData(searchParams) {
 		if (searchParams.has("type")) {
 			const type = searchParams.get("type");

@@ -39,7 +39,7 @@ const INFO_MSG_Y = 15;
 const ARRAY_START_X = 100;
 const ARRAY_START_Y = 60;
 
-const MAX_LENGTH = 22;
+const MAX_LENGTH = 26;
 
 const COMP_COUNT_X = 575;
 const COMP_COUNT_Y = 30;
@@ -104,7 +104,7 @@ export default class BruteForce extends Algorithm {
 			],
 			'Example',
 		);
-		this.exampleDropdown.onclick = this.exampleCallback.bind(this);
+		this.exampleDropdown.onchange = this.exampleCallback.bind(this);
 		this.controls.push(this.exampleDropdown);
 
 		addDivisorToAlgorithmBar();
@@ -159,6 +159,7 @@ export default class BruteForce extends Algorithm {
 
 	exampleCallback() {
 		const selection = this.exampleDropdown.value;
+		this.exampleDropdown.options[0].text = this.exampleDropdown.options[this.exampleDropdown.selectedIndex].text;
 		if (!selection) {
 			return;
 		}
