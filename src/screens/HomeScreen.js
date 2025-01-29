@@ -7,11 +7,15 @@ import Header from '../components/Header';
 import React from 'react';
 
 /* Side Panel Buttons */
-const allCategories = ['All', ...new Set(algoFilter.map(item => item.category))];
+const allCategories = [...new Set(algoFilter.map(item => item.category))];
 
-function SideButton({ button, filter }) {
+/* Reach.memo tells react to only rerender if the params change (which they wont) */
+const SideButton = React.memo(function SideButton({ button, filter }) {
 	return (
 		<div className="Side-Buttons">
+			<button type="button" onClick={() => filter("")} className="btn">
+				All
+			</button>
 			{button.map((cat, i) => {
 				return (
 					<button type="button" key={i} onClick={() => filter(cat)} className="btn">
@@ -21,7 +25,7 @@ function SideButton({ button, filter }) {
 			})}
 		</div>
 	);
-}
+})
 
 /* Buttons for DSA pages */
 function SearchFilter({ filteredAlgoList }) {
@@ -95,33 +99,23 @@ const HomeScreen = ({ theme, toggleTheme }) => {
 	/* Search Bar Functionality */
 	const [searchParams, setSearchParams] = useSearchParams();
 
+	/* Search Param Setter */
+	const setQueryParam = (param, newFilter) => {
+		if (newFilter && newFilter !== '') {
+			searchParams.set(param, newFilter);
+			setSearchParams(searchParams);
+		} else {
+			searchParams.delete(param);
+			setSearchParams(searchParams);
+		}
+	};
+
+	/* Search Param Getters */
+	const algoFilterButton = searchParams.get('filter') ? searchParams.get('filter') : '';
 	const dsaFilter = searchParams.get('q') ? searchParams.get('q') : '';
 
-	const setDsaFilter = newFilter => {
-		if (newFilter && newFilter !== '') {
-			searchParams.set('q', newFilter);
-			setSearchParams(searchParams);
-		} else {
-			searchParams.delete('q');
-			setSearchParams(searchParams);
-		}
-	};
-
-	/* Side Panel Functionality */
-	const sidefilter = button => {
-		if (button === 'All') {
-			searchParams.delete('filter');
-			setSearchParams(searchParams);
-		} else {
-			searchParams.set('filter', button);
-			setSearchParams(searchParams);
-		}
-	};
-
-	const algoFilterButton = searchParams.get('filter') ? searchParams.get('filter') : 'ALL';
-
 	const filterList =
-		algoFilterButton === 'ALL'
+		algoFilterButton === ''
 			? algoList
 			: algoFilter.filter(item => item.category === algoFilterButton).map(item => item.id);
 
@@ -156,9 +150,12 @@ const HomeScreen = ({ theme, toggleTheme }) => {
 											placeholder="Search..."
 											type="search"
 											value={dsaFilter}
-											onChange={e => setDsaFilter(e.target.value)}
+											onChange={e => setQueryParam("q", e.target.value)}
 										/>
-										<SideButton button={allCategories} filter={sidefilter} />
+										<SideButton
+											button={allCategories}
+											filter={buttonValue => setQueryParam("filter", buttonValue)}
+										/>
 									</div>
 
 									<div className="inner-flex">
