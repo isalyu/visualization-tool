@@ -1,5 +1,5 @@
 import '../css/App.css';
-import { Link, Route, Routes } from 'react-router-dom';
+import { Link, Route, Routes, useSearchParams } from 'react-router-dom';
 import React, { useState } from 'react';
 import { algoFilter, algoList, algoMap } from '../AlgoList';
 import AboutScreen from './AboutScreen';
@@ -94,7 +94,21 @@ function FinalsBanner() {
 
 const HomeScreen = ({ theme, toggleTheme }) => {
 	/* Search Bar Functionality */
-	const [dsaFilter, setDsaFilter] = useState('');
+	const [searchParams, setSearchParams] = useSearchParams();
+
+	const dsaFilter = searchParams.get('dsaFilter') ? searchParams.get('dsaFilter') : "";
+
+	const setDsaFilter = (newFilter) => {
+		if (newFilter && newFilter !== "") {
+			setSearchParams({
+				"q": newFilter,
+			})
+		} else {
+			searchParams.delete('q');
+			setSearchParams(searchParams);
+		}
+	}
+
 	const [filterList, setFilteredList] = useState(algoList);
 
 	const filteredAlgoList = filterList.filter(name => {
@@ -158,6 +172,7 @@ const HomeScreen = ({ theme, toggleTheme }) => {
 											className="dsa-filter"
 											placeholder="Search..."
 											type="search"
+											value={dsaFilter}
 											onChange={e => setDsaFilter(e.target.value)}
 										/>
 										<SideButton button={sideButtons} filter={sidefilter} />
