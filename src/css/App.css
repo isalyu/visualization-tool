@@ -124,7 +124,7 @@
 	margin-left: 11%;
 	transition: 0.2s;
 	pointer-events: none;
-	z-index: 0;
+	z-index: 1;
 }
 
 .blob-container-algo {
@@ -519,7 +519,7 @@ input::placeholder {
 	box-shadow: 5px 12px 12px var(--shadow);
 	transition: all 0.4s ease 0s;
 	pointer-events: auto;
-	z-index: 1;
+	z-index: 2;
 }
 
 .Side-Buttons button {
