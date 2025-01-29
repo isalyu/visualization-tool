@@ -103,10 +103,10 @@ const HomeScreen = ({ theme, toggleTheme }) => {
 	const setQueryParam = (param, newFilter) => {
 		if (newFilter && newFilter !== '') {
 			searchParams.set(param, newFilter);
-			setSearchParams(searchParams);
+			setSearchParams(searchParams, {replace: true});
 		} else {
 			searchParams.delete(param);
-			setSearchParams(searchParams);
+			setSearchParams(searchParams, {replace: true});
 		}
 	};
 
