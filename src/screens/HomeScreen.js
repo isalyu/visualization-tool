@@ -1,14 +1,13 @@
 import '../css/App.css';
 import { Link, Route, Routes, useSearchParams } from 'react-router-dom';
-import React, { useState } from 'react';
 import { algoFilter, algoList, algoMap } from '../AlgoList';
 import AboutScreen from './AboutScreen';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import React from 'react';
 
 /* Side Panel Buttons */
 const allCategories = ['All', ...new Set(algoFilter.map(item => item.category))];
-
 
 function SideButton({ button, filter }) {
 	return (
@@ -53,7 +52,7 @@ function SearchFilter({ filteredAlgoList }) {
 										<img
 											alt={algoMap[name][0]}
 											src={`./algo_buttons/${algoMap[name][0]}.png`}
-											onError = {(e) => {
+											onError={e => {
 												const currentSrc = e.target.src;
 												if (currentSrc.endsWith('.png')) {
 													e.target.src = `./algo_buttons/${algoMap[name][0]}.gif`;
@@ -96,21 +95,37 @@ const HomeScreen = ({ theme, toggleTheme }) => {
 	/* Search Bar Functionality */
 	const [searchParams, setSearchParams] = useSearchParams();
 
-	const dsaFilter = searchParams.get('dsaFilter') ? searchParams.get('dsaFilter') : "";
+	const dsaFilter = searchParams.get('q') ? searchParams.get('q') : '';
 
-	const setDsaFilter = (newFilter) => {
-		if (newFilter && newFilter !== "") {
-			setSearchParams({
-				"q": newFilter,
-			})
+	const setDsaFilter = newFilter => {
+		if (newFilter && newFilter !== '') {
+			searchParams.set('q', newFilter);
+			setSearchParams(searchParams);
 		} else {
 			searchParams.delete('q');
 			setSearchParams(searchParams);
 		}
-	}
+	};
 
-	const [filterList, setFilteredList] = useState(algoList);
+	/* Side Panel Functionality */
+	const sidefilter = button => {
+		if (button === 'All') {
+			searchParams.delete('filter');
+			setSearchParams(searchParams);
+		} else {
+			searchParams.set('filter', button);
+			setSearchParams(searchParams);
+		}
+	};
 
+	const algoFilterButton = searchParams.get('filter') ? searchParams.get('filter') : 'ALL';
+
+	const filterList =
+		algoFilterButton === 'ALL'
+			? algoList
+			: algoFilter.filter(item => item.category === algoFilterButton).map(item => item.id);
+
+	/* Creating the final list of algorithms */
 	const filteredAlgoList = filterList.filter(name => {
 		if (dsaFilter) {
 			return (
@@ -121,38 +136,6 @@ const HomeScreen = ({ theme, toggleTheme }) => {
 		}
 		return true;
 	});
-
-	// const relatedSearchesList = useMemo(() => {
-	// 	const relatedSet = new Set();
-
-	// 	if (dsaFilter) {
-	// 		filteredAlgoList.forEach(name => {
-	// 			const related = relatedSearches[name];
-	// 			related.forEach(algo => {
-	// 				if (!filteredAlgoList.includes(algo)) {
-	// 					relatedSet.add(algo);
-	// 				}
-	// 			});
-	// 		});
-	// 	}
-
-	// 	return ['Related Pages', ...Array.from(relatedSet)];
-	// }, [filteredAlgoList, dsaFilter]);
-
-	/* Side Panel Functionality */
-	const [sideButtons] = useState(allCategories);
-
-	const sidefilter = button => {
-		if (button === 'All') {
-			setFilteredList(algoList);
-			return;
-		}
-
-		const filteredData = algoFilter
-			.filter(item => item.category === button)
-			.map(item => item.id);
-		setFilteredList(filteredData);
-	};
 
 	return (
 		<div className="container">
@@ -175,7 +158,7 @@ const HomeScreen = ({ theme, toggleTheme }) => {
 											value={dsaFilter}
 											onChange={e => setDsaFilter(e.target.value)}
 										/>
-										<SideButton button={sideButtons} filter={sidefilter} />
+										<SideButton button={allCategories} filter={sidefilter} />
 									</div>
 
 									<div className="inner-flex">
