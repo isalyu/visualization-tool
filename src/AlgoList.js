@@ -236,11 +236,11 @@ export const algoFilter = [
 	},
 	{
 		id: 'OpenHash',
-		category: 'Hashmaps',
+		category: 'HashMaps',
 	},
 	{
 		id: 'ClosedHash',
-		category: 'Hashmaps',
+		category: 'HashMaps',
 	},
 	{
 		id: 'BubbleSort',
