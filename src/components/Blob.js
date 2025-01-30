@@ -55,7 +55,7 @@ const Blob = () => {
 				height="100%"
 				id="blobSvg"
 				transform="rotate(65)"
-				style={{ opacity: '1', cursor: 'grab' }}
+				style={{ opacity: '1', cursor: 'pointer' }}
 			>
 				{' '}
 				<defs>

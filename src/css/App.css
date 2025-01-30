@@ -116,7 +116,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: flex-end;
-	cursor: grab;
+	cursor: pointer;
 	opacity: 1;
 	width: 160px;
 	height: 160px;
@@ -124,7 +124,7 @@
 	margin-left: 11%;
 	transition: 0.2s;
 	pointer-events: none;
-	z-index: 0;
+	z-index: 1;
 }
 
 .blob-container-algo {
@@ -338,6 +338,10 @@ div.header h1 {
 div.container {
 	width: 100%;
 	margin: 0px;
+	/* Makes the container take up 100% of the device height even if the page has minimal content */
+	display: flex;
+	flex-direction: column;
+	min-height: 100dvh;
 }
 
 div.header {
@@ -357,6 +361,7 @@ div.footer {
 
 .footer {
 	padding: 10px;
+	z-index: -1;
 }
 
 .footer a {
@@ -365,6 +370,8 @@ div.footer {
 
 div.content {
 	padding: 5em 1em 1em 1em;
+	/* grows the content to fill extra space in the container */
+	flex: 1;
 }
 
 .contact {
@@ -513,7 +520,7 @@ input::placeholder {
 	box-shadow: 5px 12px 12px var(--shadow);
 	transition: all 0.4s ease 0s;
 	pointer-events: auto;
-	z-index: 1;
+	z-index: 2;
 }
 
 .Side-Buttons button {
