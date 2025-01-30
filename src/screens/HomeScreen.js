@@ -3,7 +3,6 @@ import { Route, Routes, useSearchParams } from 'react-router-dom';
 import { algoFilter, algoList, algoMap } from '../AlgoList';
 import AboutScreen from './AboutScreen';
 import Blob from '../components/Blob';
-import Draggable from 'react-draggable';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import React from 'react';
@@ -94,11 +93,9 @@ const HomeScreen = ({ theme, toggleTheme }) => {
 										/>
 									</div>
 									{/* Blob Gimmick */}
-									<Draggable>
-										<div id="blob-container">
-											<Blob />
-										</div>
-									</Draggable>
+									<div id="blob-container">
+										<Blob />
+									</div>
 									<div className="inner-flex">
 										<SearchFilter filteredAlgoList={filteredAlgoList} />
 									</div>
