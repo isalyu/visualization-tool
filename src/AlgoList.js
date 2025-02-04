@@ -29,7 +29,7 @@ export const algoMap = {
 	InsertionSort: ['Insertion Sort', algos.InsertionSort, true],
 	SelectionSort: ['Selection Sort', algos.SelectionSort, true],
 	Quicksort: ['Quicksort', algos.Quicksort, true],
-	Quickselect: ['Quick Select (kᵗʰ Select)', algos.Quickselect, true],
+	Quickselect: ['Quickselect (kᵗʰ Select)', algos.Quickselect, true],
 	MergeSort: ['MergeSort', algos.MergeSort, true],
 	LSDRadix: ['LSD Radix Sort', algos.LSDRadix, true],
 	HeapSort: ['HeapSort', algos.HeapSort, true],
@@ -244,35 +244,35 @@ export const algoFilter = [
 	},
 	{
 		id: 'BubbleSort',
-		category: 'Sorting and Quick Select',
+		category: 'Sorting and Quickselect',
 	},
 	{
 		id: 'CocktailSort',
-		category: 'Sorting and Quick Select',
+		category: 'Sorting and Quickselect',
 	},
 	{
 		id: 'InsertionSort',
-		category: 'Sorting and Quick Select',
+		category: 'Sorting and Quickselect',
 	},
 	{
 		id: 'Quicksort',
-		category: 'Sorting and Quick Select',
+		category: 'Sorting and Quickselect',
 	},
 	{
 		id: 'Quickselect',
-		category: 'Sorting and Quick Select',
+		category: 'Sorting and Quickselect',
 	},
 	{
 		id: 'MergeSort',
-		category: 'Sorting and Quick Select',
+		category: 'Sorting and Quickselect',
 	},
 	{
 		id: 'LSDRadix',
-		category: 'Sorting and Quick Select',
+		category: 'Sorting and Quickselect',
 	},
 	{
 		id: 'HeapSort',
-		category: 'Sorting and Quick Select',
+		category: 'Sorting and Quickselect',
 	},
 	{
 		id: 'BruteForce',
