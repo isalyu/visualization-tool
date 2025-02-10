@@ -28,3 +28,4 @@ contrib.txt
 
 # ide settings
 .vscode/
+.history

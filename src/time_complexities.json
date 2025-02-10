@@ -117,20 +117,10 @@
 			}
 		},
 		"Remove from Back (with tail)": {
-			"worst": {
+			"all cases": {
 				"big_o": "O(n)",
 				"explanation": "You have to traverse to the end of the list to make the second-to-last node the tail.",
 				"example": "1->2->3->4->null removeFromBack()"
-			},
-			"average": {
-				"big_o": "O(n)",
-				"explanation": "You have to traverse to the end of the list to make the second-to-last node the tail.",
-				"example": "1->2->3->4->null removeFromBack()"
-			},
-			"best": {
-				"big_o": "O(1)",
-				"explanation": "If the list has one element (which is both head and tail), simply clear the list.",
-				"example": "1->null removeFromBack()"
 			}
 		},
 		"Remove at Index (with tail)": {
