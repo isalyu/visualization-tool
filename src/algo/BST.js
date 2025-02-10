@@ -28,6 +28,7 @@ import Algorithm, {
 	addControlToAlgorithmBar,
 	addDivisorToAlgorithmBar,
 	addGroupToAlgorithmBar,
+	addLabelToAlgorithmBar,
 	addRadioButtonGroupToAlgorithmBar,
 } from './Algorithm.js';
 import { act } from '../anim/AnimationMain';
@@ -164,6 +165,38 @@ export default class BST extends Algorithm {
 		this.succButton.onclick = () => (this.predSucc = 'succ');
 		this.succButton.checked = true;
 		this.predSucc = 'succ';
+
+		addDivisorToAlgorithmBar();
+
+		const verticalGroup = addGroupToAlgorithmBar(false);
+
+		// label for new field allowing adding multiple elements at once 
+		addLabelToAlgorithmBar(
+		  'Comma separated list (e.g. "3,1,2"). Max 18 elements & no elements > 999',
+		  verticalGroup
+		);
+	
+		// horizontal group for text 
+		const horizontalGroup = addGroupToAlgorithmBar(true, verticalGroup);
+	
+		// text field for entering comma separated list 
+		this.addListField = addControlToAlgorithmBar('Text', '', horizontalGroup);
+		this.addListField.onkeydown = this.returnSubmit(
+		  this.addListField,
+		  this.insertListCallback.bind(this),
+		  60,     // character limit
+		  false
+		);
+		this.controls.push(this.addListField);
+	
+		// button to insert all elements in comma separated list
+		this.insertListButton = addControlToAlgorithmBar('Button', 'Insert List', horizontalGroup);
+		this.insertListButton.onclick = this.insertListCallback.bind(this);
+		this.controls.push(this.insertListButton);
+
+		this.insertQueue = [];
+		this.animationManager.addListener('UpdateAndDrawComplete', this, this.onSingleInsertionEnded);
+	
 	}
 
 	reset() {
@@ -182,6 +215,34 @@ export default class BST extends Algorithm {
 			this.implementAction(this.add.bind(this), parseInt(insertedValue));
 		} else {
 			this.shake(this.insertButton);
+		}
+	}
+
+	insertListCallback() {
+		const addListString = this.addListField.value.trim();
+		if (!addListString) return;
+
+		// split input list into array of elements [e.g. "10,20,30" => ["10", "20", "30"]]
+		const itemsToAdd = addListString.split(',');
+		this.addListField.value = '';
+
+		// convert items to add into numbers, add to insert queue
+		this.insertQueue = itemsToAdd
+			.map(str => parseInt(str.trim(), 10))
+			.filter(val => !Number.isNaN(val) && Math.abs(val) <= 999);
+
+		// insert first item into tree
+		if (this.insertQueue.length > 0) {
+			const val = this.insertQueue.shift();
+			this.implementAction(this.add.bind(this), val);
+		}
+	}
+
+	// insert items after first if others remain
+	onSingleInsertionEnded() {
+		if (this.insertQueue.length > 0) {
+			const nextVal = this.insertQueue.shift();
+			this.implementAction(this.add.bind(this), nextVal);
 		}
 	}
 

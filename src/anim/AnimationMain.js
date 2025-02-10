@@ -417,6 +417,7 @@ export default class AnimationManager extends EventListener {
 			this.stopTimer();
 			this.animatedObjects.update();
 			this.animatedObjects.draw();
+			this.fireEvent('UpdateAndDrawComplete', 'NoData'); 
 			return;
 		}
 		this.undoAnimationStepIndices.push(this.currentAnimation);
