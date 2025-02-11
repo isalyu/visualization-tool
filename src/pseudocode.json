@@ -1065,7 +1065,7 @@
 				["    return new node with data"],
 				["  else if (data < curr.data):"],
 				["    reinforce left child with addH call on left child"],
-				["  else if (data > right child):"],
+				["  else if (data > curr.data):"],
 				["    reinforce right child with addH call on right child"],
 				["  return curr"],
 				["end procedure"]
