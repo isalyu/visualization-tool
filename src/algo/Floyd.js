@@ -110,14 +110,14 @@ export default class Floyd extends Graph {
 	}
 
 	largeGraphCallback() {
-		if (this.size !== LARGE_SIZE) {
-			this.animationManager.resetAll();
-			//this.animationManager.setAllLayers([0]);
-			this.logicalButton.disabled = true;
-			this.adjacencyListButton.disabled = true;
-			this.adjacencyMatrixButton.disabled = true;
-			this.setup_large();
-		}
+		// if (this.size !== LARGE_SIZE) {
+		// 	this.animationManager.resetAll();
+		// 	//this.animationManager.setAllLayers([0]);
+		// 	this.logicalButton.disabled = true;
+		// 	this.adjacencyListButton.disabled = true;
+		// 	this.adjacencyMatrixButton.disabled = true;
+		// 	this.setup_large();
+		// }
 	}
 
 	getCostLabel(value, alwaysUseINF) {
