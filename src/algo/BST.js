@@ -870,13 +870,13 @@ export default class BST extends Algorithm {
 		}
 		this.cmd(act.setHighlight, curr.graphicID, 1);
 		if (data < curr.data) {
-			this.highlight(7, 0, this.codeID);
-			this.highlight(8, 0, this.codeID);
+			this.highlight(9, 0, this.codeID);
+			this.highlight(10, 0, this.codeID);
 			this.cmd(act.setText, 0, `${data} < ${curr.data}. Looking left`);
 			this.cmd(act.step);
 
-			this.unhighlight(7, 0, this.codeID);
-			this.unhighlight(8, 0, this.codeID);
+			this.unhighlight(9, 0, this.codeID);
+			this.unhighlight(10, 0, this.codeID);
 			curr.left = this.removeH(curr.left, data);
 			if (curr.left != null) {
 				curr.left.parent = curr;
@@ -884,13 +884,13 @@ export default class BST extends Algorithm {
 				this.resizeTree();
 			}
 		} else if (data > curr.data) {
-			this.highlight(9, 0, this.codeID);
-			this.highlight(10, 0, this.codeID);
+			this.highlight(11, 0, this.codeID);
+			this.highlight(12, 0, this.codeID);
 			this.cmd(act.setText, 0, `${data} > ${curr.data}. Looking right`);
 			this.cmd(act.step);
 
-			this.unhighlight(9, 0, this.codeID);
-			this.unhighlight(10, 0, this.codeID);
+			this.unhighlight(11, 0, this.codeID);
+			this.unhighlight(12, 0, this.codeID);
 			curr.right = this.removeH(curr.right, data);
 			if (curr.right != null) {
 				curr.right.parent = curr;
