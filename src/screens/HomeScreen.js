@@ -1,6 +1,6 @@
 import '../css/App.css';
 import { Route, Routes, useSearchParams } from 'react-router-dom';
-import { algoFilter, algoList, algoMap } from '../AlgoList';
+import { algoFilter, algoList, algoMap, relatedSearches } from '../AlgoList';
 import AboutScreen from './AboutScreen';
 import Blob from '../components/Blob';
 import Footer from '../components/Footer';
@@ -65,6 +65,22 @@ const HomeScreen = ({ theme, toggleTheme }) => {
 		}
 		return true;
 	});
+	
+	function getRelatedAlgoList() { 
+		const relatedSet = new Set();
+		if (dsaFilter) {
+			for (const key in relatedSearches) {
+				if (key.toLowerCase().includes(dsaFilter.toLowerCase())) {
+					relatedSearches[key].forEach(value => {
+						if (!filteredAlgoList.includes(value)) {
+							relatedSet.add(value)
+						}
+					});
+				}
+			}
+		}
+		return Array.from(relatedSet);
+	}
 
 	return (
 		<div className="container">
@@ -96,8 +112,18 @@ const HomeScreen = ({ theme, toggleTheme }) => {
 									<div id="blob-container">
 										<Blob />
 									</div>
-									<div className="inner-flex">
-										<SearchFilter filteredAlgoList={filteredAlgoList} />
+									<div className="mid-flex">
+										<div className="inner-flex">
+											<SearchFilter filteredAlgoList={filteredAlgoList} />
+										</div>
+										{getRelatedAlgoList().length > 0 && (
+											<>
+												<h1 className="related-pages-header">Related Pages</h1>
+												<div className="inner-flex">
+													<SearchFilter filteredAlgoList={getRelatedAlgoList()} />
+												</div>
+											</>
+										)}
 									</div>
 								</div>
 							</>
