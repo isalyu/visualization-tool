@@ -363,10 +363,19 @@ export default class OpenHash extends Hash {
 		const start = index;
 		let foundIndex = -1;
 		let candidateIndex = index;
+		let nonRemovedEntriesSeen = 0;
 		for (let i = 0; i < this.table_size; i++) {
 			this.cmd(act.setHighlight, this.hashTableVisual[candidateIndex], 1);
 			this.cmd(act.step);
 			this.cmd(act.setHighlight, this.hashTableVisual[candidateIndex], 0);
+			
+			if (!this.deleted[candidateIndex]) {
+				nonRemovedEntriesSeen++;
+				if (nonRemovedEntriesSeen === this.size) {
+					break;
+				}
+			}
+
 			if (
 				!this.empty[candidateIndex] &&
 				!this.deleted[candidateIndex] &&
