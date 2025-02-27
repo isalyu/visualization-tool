@@ -328,7 +328,7 @@
 			},
 			"best": {
 				"big_o": "O(1)",
-				"explanation": "Removing the front or back.",
+				"explanation": "Removing the front.",
 				"example": "[1, 2, 3, 4, 5] index = 0"
 			}
 		}
