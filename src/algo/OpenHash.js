@@ -368,13 +368,6 @@ export default class OpenHash extends Hash {
 			this.cmd(act.setHighlight, this.hashTableVisual[candidateIndex], 1);
 			this.cmd(act.step);
 			this.cmd(act.setHighlight, this.hashTableVisual[candidateIndex], 0);
-			
-			if (!this.deleted[candidateIndex]) {
-				nonRemovedEntriesSeen++;
-				if (nonRemovedEntriesSeen === this.size) {
-					break;
-				}
-			}
 
 			if (
 				!this.empty[candidateIndex] &&
@@ -388,6 +381,13 @@ export default class OpenHash extends Hash {
 				(this.deleted[candidateIndex] && this.hashTableValues[candidateIndex].key === key)
 			) {
 				break;
+			}
+
+			if (!this.deleted[candidateIndex]) {
+				nonRemovedEntriesSeen++;
+				if (nonRemovedEntriesSeen === this.size) {
+					break;
+				}
 			}
 
 			if (this.currentProbeType === 'quadratic') {
@@ -631,7 +631,7 @@ export default class OpenHash extends Hash {
 
 		return this.commands;
 	}
-	
+
 	resizeInitialTableCall() {
 		this.clearCallback();
 	}
