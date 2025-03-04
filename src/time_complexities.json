@@ -971,7 +971,7 @@
 		"Add": {
 			"worst": {
 				"big_o": "O(n)",
-				"explanation": "With unlucky coin flips, the SkipList can become a multi-layered LinkedList, so you have to traverse it like a LinkedList. There is $O(n)$ data to traverse once, then $O(log n) layers to go straight down, which simplifies to $O(n)$,",
+				"explanation": "With unlucky coin flips, the SkipList can become a multi-layered LinkedList, so you have to traverse it like a LinkedList. There is $O(n)$ data to traverse once, then $O(log n)$ layers to go straight down, which simplifies to $O(n)$,",
 				"example": "3,7,15,22|3,7,15,22|3,7,15,22|3,7,15,22 add 11 with 4 heads."
 			},
 			"average": {
@@ -988,7 +988,7 @@
 		"Remove": {
 			"worst": {
 				"big_o": "O(n)",
-				"explanation": "With unlucky coin flips, the SkipList can become a multi-layered LinkedList, so you have to traverse it like a LinkedList. There is $O(n)$ data to traverse once, then $O(log n) layers to go straight down, which simplifies to $O(n)$,",
+				"explanation": "With unlucky coin flips, the SkipList can become a multi-layered LinkedList, so you have to traverse it like a LinkedList. There is $O(n)$ data to traverse once, then $O(log n)$ layers to go straight down, which simplifies to $O(n)$,",
 				"example": "3,7,15,22|3,7,15,22|3,7,15,22|3,7,15,22 remove 15"
 			},
 			"average": {
@@ -1005,7 +1005,7 @@
 		"Find": {
 			"worst": {
 				"big_o": "O(n)",
-				"explanation": "With unlucky coin flips, the SkipList can become a multi-layered LinkedList, so you have to traverse it like a LinkedList. There is $O(n)$ data to traverse once, then $O(log n) layers to go straight down, which simplifies to $O(n)$,",
+				"explanation": "With unlucky coin flips, the SkipList can become a multi-layered LinkedList, so you have to traverse it like a LinkedList. There is $O(n)$ data to traverse once, then $O(log n)$ layers to go straight down, which simplifies to $O(n)$,",
 				"example": "3,7,15,22|3,7,15,22|3,7,15,22|3,7,15,22 find 22"
 			},
 			"average": {
