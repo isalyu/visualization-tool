@@ -252,6 +252,10 @@ export const algoFilter = [
 		category: 'Sorting and Quickselect',
 	},
 	{
+		id: 'SelectionSort',
+		category: 'Sorting and Quickselect',
+	},
+	{
 		id: 'InsertionSort',
 		category: 'Sorting and Quickselect',
 	},
