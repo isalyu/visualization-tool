@@ -32,7 +32,6 @@ import Algorithm, {
 	addLabelToAlgorithmBar,
 } from './Algorithm.js';
 import { act } from '../anim/AnimationMain.js';
-import pseudocodeText from '../pseudocode.json';
 
 const MAX_ARRAY_SIZE = 15;
 
@@ -47,9 +46,6 @@ const ARRAY_ELEM_HEIGHT = 50;
 
 const COMP_COUNT_X = 100;
 const COMP_COUNT_Y = 50;
-
-const CODE_START_X = 50;
-const CODE_START_Y = 80;
 
 // const ARRRAY_ELEMS_PER_LINE = 15;
 
@@ -66,7 +62,6 @@ const CODE_START_Y = 80;
 // const SIZE = 10;
 
 const LARGE_OFFSET = 15;
-const SMALL_OFFSET = 7;
 
 export default class MergeSort extends Algorithm {
 	constructor(am, w, h) {
@@ -305,15 +300,15 @@ export default class MergeSort extends Algorithm {
 		const numPartitions = Math.ceil(Math.sqrt(this.arrayData.length));
 
 		// Visually split into partitions
-		let partition_bounds = [];
+		const partition_bounds = [];
+		this.secondArrayID = [];
 		for (let i = 0; i < numPartitions; i++) {
 			const left = Math.floor((i * this.arrayData.length) / numPartitions);
 			const right = Math.min(this.arrayData.length - 1, Math.floor(((i + 1) * this.arrayData.length) / numPartitions) - 1);
 			const offset = i * LARGE_OFFSET;
 			const prevOffset = i > 0 ? (i - 1) * LARGE_OFFSET : 0;
-			this.drawArrayAndCopy(left, right, offset, prevOffset, 1);
+			this.secondArrayID.push(...this.drawArrayAndCopy(left, right, offset, prevOffset, 1).filter(id => id !== undefined));
 			partition_bounds.push([left, right]);
-			break; // TEMP
 		}
 
 		this.cmd(
@@ -334,48 +329,48 @@ export default class MergeSort extends Algorithm {
 		this.cmd(act.setHighlight, this.jPointerID, 1);
 
 		// Insertion sort on each partition
-		for (let a = 0; a < partition_bounds.length; a++) {
+		for (let a = 0; a < numPartitions; a++) {
 			const left = partition_bounds[a][0];
 			const right = partition_bounds[a][1];
 			const num_elements = right - left + 1;
-			console.log('insertion sort: ' + left + ' ' + right);
 			this.cmd(act.step);
-			
+
 			// Insertion sort
-			for (let i = 1; i < num_elements; i++) {
-				// this.cmd(act.setForegroundColor, this.iPointerID, '#0000FF');
+			for (let i = 0; i < num_elements; i++) {
 				this.cmd(act.step);
 				for (let j = i; j >= 1; j--) {
-					// this.movePointers(j - 1, j);
+					const index_offset = partition_bounds[a][0];
+					this.movePointers(j - 1 + index_offset, j + index_offset, LARGE_OFFSET * a);
 					this.cmd(act.step);
 					this.cmd(
 						act.setText,
 						this.comparisonCountID,
 						'Comparison Count: ' + ++this.compCount,
 					);
-					console.log(this.arrayData[j], this.arrayData[j - 1])
-					if (this.arrayData[j] < this.arrayData[j - 1]) {
-						this.swap(j, j - 1);
-						this.cmd(act.step);
-					} else {
-						break;
+					if (this.arrayData[j + index_offset] < this.arrayData[j - 1 + index_offset]) {
+						this.swap(j + index_offset, j - 1 + index_offset, LARGE_OFFSET * a);
 					}
+					if (j === 1) this.cmd(act.setBackgroundColor, this.secondArrayID[index_offset], '#2ECC71');
+					this.cmd(act.setBackgroundColor, this.secondArrayID[j + index_offset], '#2ECC71');
 				}
 			}
 		}
+		this.cmd(act.delete, this.iPointerID);
+		this.cmd(act.delete, this.jPointerID);
 
 		// Merge partitions
-		// for (let size = numPartitions; size > 1; size = Math.ceil(size / 2)) {
-		// 	for (let i = 0; i < size / 2; i++) {
-		// 		const left = partition_bounds[i * 2][0];
-		// 		const mid = partition_bounds[i * 2][1];
-		// 		const right = partition_bounds[i * 2 + 1] ? partition_bounds[i * 2 + 1][1] : mid;
-		// 		this.merge(left, right, mid + 1, 0, 0, 0, 0, this.arrayID);
-		// 	}
-		// }
-
+		const offsets = [];
+		for (let i = 0; i < numPartitions; i++) {
+			const offset = i * LARGE_OFFSET;
+			offsets.push(offset);
+		}
+		this.merge(partition_bounds, 0, [0], this.arrayID);
 		this.cmd(act.step);
-		this.unhighlight(0, 0, this.codeID);
+
+		// Delete bottom array
+		for (let i = 0; i < this.secondArrayID.length; i++) {
+			this.cmd(act.delete, this.secondArrayID[i]);
+		}
 
 		return this.commands;
 	}
@@ -419,45 +414,44 @@ export default class MergeSort extends Algorithm {
 		return tempArrayID;
 	}
 
-	movePointers(i, j) {
-		// const iXPos = i * ARRAY_ELEM_WIDTH + ARRAY_START_X;
-		// const iYPos = ARRAY_START_Y;
-		// this.cmd(act.move, this.iPointerID, iXPos, iYPos);
-		// const jXPos = j * ARRAY_ELEM_WIDTH + ARRAY_START_X;
-		// const jYPos = ARRAY_START_Y;
-		// this.cmd(act.move, this.jPointerID, jXPos, jYPos);
-		// this.cmd(act.step);
+	movePointers(i, j, extra_offset) {
+		const iXPos = i * ARRAY_ELEM_WIDTH + ARRAY_START_X + extra_offset;
+		const iYPos = ARRAY_START_Y + ARRAY_LINE_SPACING;
+		this.cmd(act.move, this.iPointerID, iXPos, iYPos);
+		const jXPos = j * ARRAY_ELEM_WIDTH + ARRAY_START_X + extra_offset;
+		const jYPos = ARRAY_START_Y + ARRAY_LINE_SPACING;
+		this.cmd(act.move, this.jPointerID, jXPos, jYPos);
+		this.cmd(act.step);
 	}
 
-	swap(i, j) {
+	swap(i, j, extra_offset) {
 		this.cmd(act.setForegroundColor, this.iPointerID, '#FF0000');
 		this.cmd(act.setForegroundColor, this.jPointerID, '#FF0000');
-		this.cmd(act.step); // Add step here to see the color change
+		this.cmd(act.step);
 	
 		const iLabelID = this.nextIndex++;
-		const iXPos = i * ARRAY_ELEM_WIDTH + ARRAY_START_X;
-		const iYPos = ARRAY_START_Y;
+		const iXPos = i * ARRAY_ELEM_WIDTH + ARRAY_START_X + extra_offset;
+		const iYPos = ARRAY_START_Y + ARRAY_LINE_SPACING;
 		this.cmd(act.createLabel, iLabelID, this.displayData[i], iXPos, iYPos);
+	
 		const jLabelID = this.nextIndex++;
-		const jXPos = j * ARRAY_ELEM_WIDTH + ARRAY_START_X;
-		const jYPos = ARRAY_START_Y;
+		const jXPos = j * ARRAY_ELEM_WIDTH + ARRAY_START_X + extra_offset;
+		const jYPos = ARRAY_START_Y + ARRAY_LINE_SPACING;
 		this.cmd(act.createLabel, jLabelID, this.displayData[j], jXPos, jYPos);
-		this.cmd(act.setText, this.arrayID[i], '');
-		this.cmd(act.setText, this.arrayID[j], '');
-		this.cmd(act.step); // Add step here to see the labels being created
+	
+		this.cmd(act.setText, this.secondArrayID[i], '');
+		this.cmd(act.setText, this.secondArrayID[j], '');
+		this.cmd(act.step);
 	
 		this.cmd(act.move, iLabelID, jXPos, jYPos);
 		this.cmd(act.move, jLabelID, iXPos, iYPos);
-		this.cmd(act.step); // Add step here to see the labels being moved
+		this.cmd(act.step);
 	
-		this.cmd(act.setText, this.swapCountID, 'Swap Count: ' + ++this.swapCount);
-		this.cmd(act.step); // Add step here to see the swap count update
-	
-		this.cmd(act.setText, this.arrayID[i], this.displayData[j]);
-		this.cmd(act.setText, this.arrayID[j], this.displayData[i]);
+		this.cmd(act.setText, this.secondArrayID[i], this.displayData[j]);
+		this.cmd(act.setText, this.secondArrayID[j], this.displayData[i]);
 		this.cmd(act.delete, iLabelID);
 		this.cmd(act.delete, jLabelID);
-		this.cmd(act.step); // Add step here to see the text being set and labels being deleted
+		this.cmd(act.step);
 	
 		// Swap data in backend array
 		let temp = this.arrayData[i];
@@ -471,172 +465,78 @@ export default class MergeSort extends Algorithm {
 	
 		this.cmd(act.setForegroundColor, this.iPointerID, '#0000FF');
 		this.cmd(act.setForegroundColor, this.jPointerID, '#0000FF');
-		this.cmd(act.step); // Add step here to see the color change back
+		this.cmd(act.step);
 	}
 
-	merge(left, right, mid, row, currOffset, leftOffset, rightOffset, currArrayID) {
+	merge(partition_bounds, currOffset, offsets, currArrayID) {
 		const tempArray = new Array(this.arrayData.length); // Temporary array to store data for sorting
 		const tempDisplay = new Array(this.arrayData.length);
 
 		// Copy data to temporary array
-		for (let i = left; i <= right; i++) {
-			tempArray[i] = this.arrayData[i];
-			tempDisplay[i] = this.displayData[i];
+		for (let i = 0; i < partition_bounds.length; i++) {
+			const [left, right] = partition_bounds[i];
+			for (let j = left; j <= right; j++) {
+				tempArray[j] = this.arrayData[j];
+				tempDisplay[j] = this.displayData[j];
+			}
 		}
 
-		this.highlight(6, 0, this.codeID);
-
 		// Create pointers
-		const bottomYPos = ARRAY_START_Y + (row + 1) * ARRAY_LINE_SPACING;
-		const iPointerID = this.nextIndex++;
-		const iXPos = left * ARRAY_ELEM_WIDTH + ARRAY_START_X + leftOffset;
-		this.cmd(act.createHighlightCircle, iPointerID, '#0000FF', iXPos, bottomYPos);
-		const jPointerID = this.nextIndex++;
-		const jXPos = mid * ARRAY_ELEM_WIDTH + ARRAY_START_X + rightOffset;
-		this.cmd(act.createHighlightCircle, jPointerID, '#0000FF', jXPos, bottomYPos);
+		const bottomYPos = ARRAY_START_Y + ARRAY_LINE_SPACING;
+		const pointers = [];
+		for (let i = 0; i < partition_bounds.length; i++) {
+			const [left] = partition_bounds[i];
+			const pointerID = this.nextIndex++;
+			const xPos = left * ARRAY_ELEM_WIDTH + ARRAY_START_X + offsets[i];
+			this.cmd(act.createHighlightCircle, pointerID, '#0000FF', xPos, bottomYPos);
+			pointers.push(pointerID);
+		}
 		const kPointerID = this.nextIndex++;
-		const kXPos = left * ARRAY_ELEM_WIDTH + ARRAY_START_X + currOffset;
-		const topYPos = ARRAY_START_Y + row * ARRAY_LINE_SPACING;
+		const kXPos = partition_bounds[0][0] * ARRAY_ELEM_WIDTH + ARRAY_START_X + currOffset;
+		const topYPos = ARRAY_START_Y;
 		this.cmd(act.createHighlightCircle, kPointerID, '#0000FF', kXPos, topYPos);
 		this.cmd(act.step);
 
-		this.unhighlight(6, 0, this.codeID);
-		this.highlight(7, 0, this.codeID);
-		this.cmd(act.step);
 		// Merge data and animate
-		let i = left;
-		let j = mid;
-		let k = left;
-		while (i < mid && j <= right) {
+		const indices = partition_bounds.map(([left]) => left);
+		let k = partition_bounds[0][0];
+		while (indices.some((index, i) => index <= partition_bounds[i][1])) {
+			let minIndex = -1;
+			for (let i = 0; i < indices.length; i++) {
+				if (indices[i] <= partition_bounds[i][1]) {
+					if (minIndex === -1 || tempArray[indices[i]] < tempArray[indices[minIndex]]) {
+						minIndex = i;
+					}
+				}
+			}
 			this.cmd(act.setText, this.comparisonCountID, 'Comparison Count: ' + ++this.compCount);
-			this.highlight(8, 0, this.codeID);
 			this.cmd(act.step);
-			this.unhighlight(8, 0, this.codeID);
-			if (tempArray[i] <= tempArray[j]) {
-				this.highlight(9, 0, this.codeID);
-				this.copyData(
-					i,
-					k,
-					leftOffset,
-					currOffset,
-					row + 1,
-					row,
-					tempDisplay[i],
-					currArrayID[k],
-					iPointerID,
-				);
-				this.unhighlight(9, 0, this.codeID);
-				this.arrayData[k] = tempArray[i];
-				this.displayData[k] = tempDisplay[i];
-				i++;
-				this.highlight(10, 0, this.codeID);
-				if (i < mid) {
-					this.movePointer(i, row + 1, leftOffset, iPointerID);
-				}
-				this.cmd(act.step);
-				this.unhighlight(10, 0, this.codeID);
-			} else {
-				this.highlight(11, 0, this.codeID);
-				this.cmd(act.step);
-				this.unhighlight(11, 0, this.codeID);
-				this.highlight(12, 0, this.codeID);
-				this.copyData(
-					j,
-					k,
-					rightOffset,
-					currOffset,
-					row + 1,
-					row,
-					tempDisplay[j],
-					currArrayID[k],
-					jPointerID,
-				);
-				this.unhighlight(12, 0, this.codeID);
-				this.arrayData[k] = tempArray[j];
-				this.displayData[k] = tempDisplay[j];
-				j++;
-				this.highlight(13, 0, this.codeID);
-				if (j <= right) {
-					this.movePointer(j, row + 1, rightOffset, jPointerID);
-				}
-				this.cmd(act.step);
-
-				this.unhighlight(13, 0, this.codeID);
-			}
-			k++;
-			this.highlight(15, 0, this.codeID);
-			this.movePointer(k, row, currOffset, kPointerID);
-			this.cmd(act.step);
-			this.unhighlight(15, 0, this.codeID);
-		}
-		this.unhighlight(7, 0, this.codeID);
-		this.highlight(17, 0, this.codeID);
-		this.cmd(act.step);
-		while (i < mid) {
-			this.highlight(18, 0, this.codeID);
 			this.copyData(
-				i,
+				indices[minIndex],
 				k,
-				leftOffset,
+				offsets[minIndex],
 				currOffset,
-				row + 1,
-				row,
-				tempDisplay[i],
+				1,
+				0,
+				tempDisplay[indices[minIndex]],
 				currArrayID[k],
-				iPointerID,
+				pointers[minIndex],
 			);
-			this.unhighlight(18, 0, this.codeID);
-			this.highlight(19, 0, this.codeID);
-			this.highlight(20, 0, this.codeID);
-			this.arrayData[k] = tempArray[i];
-			this.displayData[k] = tempDisplay[i];
-			k++;
-			i++;
-			if (k <= right) {
-				this.movePointer(i, row + 1, leftOffset, iPointerID);
-				this.movePointer(k, row, currOffset, kPointerID);
+			this.arrayData[k] = tempArray[indices[minIndex]];
+			this.displayData[k] = tempDisplay[indices[minIndex]];
+			indices[minIndex]++;
+			if (indices[minIndex] <= partition_bounds[minIndex][1]) {
+				this.movePointer(indices[minIndex], 1, offsets[minIndex], pointers[minIndex]);
 			}
-			this.cmd(act.step);
-			this.unhighlight(19, 0, this.codeID);
-			this.unhighlight(20, 0, this.codeID);
-		}
-		this.unhighlight(17, 0, this.codeID);
-		this.highlight(22, 0, this.codeID);
-		this.cmd(act.step);
-		while (j <= right) {
-			this.highlight(23, 0, this.codeID);
-			this.copyData(
-				j,
-				k,
-				rightOffset,
-				currOffset,
-				row + 1,
-				row,
-				tempDisplay[j],
-				currArrayID[k],
-				jPointerID,
-			);
-			this.unhighlight(23, 0, this.codeID);
-			this.highlight(24, 0, this.codeID);
-			this.highlight(25, 0, this.codeID);
-			this.arrayData[k] = tempArray[j];
-			this.displayData[k] = tempDisplay[j];
-			j++;
 			k++;
-			if (k <= right) {
-				this.movePointer(j, row + 1, rightOffset, jPointerID);
-				this.movePointer(k, row, currOffset, kPointerID);
-			}
+			this.movePointer(k, 0, currOffset, kPointerID);
 			this.cmd(act.step);
-
-			this.unhighlight(24, 0, this.codeID);
-			this.unhighlight(25, 0, this.codeID);
 		}
-		this.unhighlight(22, 0, this.codeID);
 
 		// Delete pointers
-		this.cmd(act.delete, iPointerID);
-		this.cmd(act.delete, jPointerID);
+		for (const pointerID of pointers) {
+			this.cmd(act.delete, pointerID);
+		}
 		this.cmd(act.delete, kPointerID);
 		this.cmd(act.step);
 	}
