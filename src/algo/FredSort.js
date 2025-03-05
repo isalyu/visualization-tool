@@ -358,13 +358,17 @@ export default class MergeSort extends Algorithm {
 		this.cmd(act.delete, this.iPointerID);
 		this.cmd(act.delete, this.jPointerID);
 
+		for (let i = 0; i < this.secondArrayID.length; i++) {
+			this.cmd(act.setBackgroundColor, this.secondArrayID[i], '#FFFFFF');
+		}
+
 		// Merge partitions
 		const offsets = [];
 		for (let i = 0; i < numPartitions; i++) {
 			const offset = i * LARGE_OFFSET;
 			offsets.push(offset);
 		}
-		this.merge(partition_bounds, 0, [0], this.arrayID);
+		this.merge(partition_bounds, 0, offsets, this.arrayID);
 		this.cmd(act.step);
 
 		// Delete bottom array
@@ -526,6 +530,7 @@ export default class MergeSort extends Algorithm {
 			this.displayData[k] = tempDisplay[indices[minIndex]];
 			indices[minIndex]++;
 			if (indices[minIndex] <= partition_bounds[minIndex][1]) {
+				// console.log(minIndex, offsets[minIndex])
 				this.movePointer(indices[minIndex], 1, offsets[minIndex], pointers[minIndex]);
 			}
 			k++;
