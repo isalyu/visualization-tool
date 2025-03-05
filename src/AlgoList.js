@@ -33,6 +33,7 @@ export const algoMap = {
 	MergeSort: ['MergeSort', algos.MergeSort, true],
 	LSDRadix: ['LSD Radix Sort', algos.LSDRadix, true],
 	HeapSort: ['HeapSort', algos.HeapSort, true],
+	FredSort: ['FredSort', algos.FredSort, false],
 	BruteForce: ['Brute Force', algos.BruteForce, true],
 	BoyerMoore: ['Boyer-Moore', algos.BoyerMoore, true],
 	KMP: ['KMP', algos.KMP, true],
