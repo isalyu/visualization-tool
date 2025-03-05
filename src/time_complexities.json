@@ -1185,6 +1185,26 @@
 		}
 	},
 
+	"FredSort": {
+		"FredSort": {
+			"worst": {
+				"big_o": "O(n √n)",
+				"explanation": "The insertion sort portion has a time complexity of the length of the partition squared, which is $(√n)² = n$. This is done for each of the $√n$ partitions, so $O(n √n)$ work is done. Merging is also $O(n √n)$.",
+				"example": "[3, 2, 4, 1, 5] with 5 as the pivot"
+			},
+			"average": {
+				"big_o": "O(n √n)",
+				"explanation": "Best and worst case are both $O(n √n)$.",
+				"example": "[3, 2, 4, 1, 5, 6] with 3 as the pivot"
+			},
+			"best": {
+				"big_o": "O(n √n)",
+				"explanation": "The insertion sort portion has a time complexity of just the length of the partition, which is $√n$. The merge portion is $O(n √n)$, thus the overall time complexity os $O(n √n)$.",
+				"example": "[3, 2, 4, 1, 5] with 3 as the pivot"
+			}
+		}
+	},
+
 	"LSDRadix": {
 		"LSDRadix": {
 			"worst": {
