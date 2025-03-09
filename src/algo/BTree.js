@@ -292,7 +292,7 @@ export default class BTree extends Algorithm {
 			this.buildTreeRecurse(this.treeRoot, nodes[i][0], newNode);
 		}
 
-		const problem = this.treeHasProblem(this.treeRoot);
+		const problem = this.treeHasProblem(this.treeRoot, 0, new Set());
 		if (problem) {
 			this.commands = [];
 			this.cmd(act.setText, this.infoLabelID, problem);
@@ -306,7 +306,7 @@ export default class BTree extends Algorithm {
 		return this.commands;
 	}
 
-	treeHasProblem(node) {
+	treeHasProblem(node, depth, depthSet) {
 		if (node == null) {
 			return '';
 		}
@@ -321,6 +321,10 @@ export default class BTree extends Algorithm {
 			}
 		}
 		if (node.isLeaf) {
+			depthSet.add(depth);
+			if (depthSet.size > 1) {
+				return `All leaf nodes must be at the same depth.`;
+			}
 			return '';
 		}
 		if (node.numKeys !== node.children.length - 1) {
@@ -341,7 +345,7 @@ export default class BTree extends Algorithm {
 		}
 
 		for (const child of node.children) {
-			const childProblem = this.treeHasProblem(child);
+			const childProblem = this.treeHasProblem(child, depth + 1, depthSet);
 			if (childProblem) return childProblem;
 		}
 		return '';
