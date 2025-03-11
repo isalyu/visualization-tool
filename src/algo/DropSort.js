@@ -334,43 +334,6 @@ export default class DropSort extends Algorithm {
 		this.cmd(act.step);
 	}
 
-	swap(i, j) {
-		this.cmd(act.setForegroundColor, this.iPointerID, '#FF0000');
-		this.cmd(act.setForegroundColor, this.jPointerID, '#FF0000');
-		const iLabelID = this.nextIndex++;
-		const iXPos = i * ARRAY_ELEM_WIDTH + ARRAY_START_X;
-		const iYPos = ARRAY_START_Y;
-		this.cmd(act.createLabel, iLabelID, this.displayData[i], iXPos, iYPos);
-		const jLabelID = this.nextIndex++;
-		const jXPos = j * ARRAY_ELEM_WIDTH + ARRAY_START_X;
-		const jYPos = ARRAY_START_Y;
-		this.cmd(act.createLabel, jLabelID, this.displayData[j], jXPos, jYPos);
-		this.cmd(act.setText, this.arrayID[i], '');
-		this.cmd(act.setText, this.arrayID[j], '');
-		this.cmd(act.move, iLabelID, jXPos, jYPos);
-		this.cmd(act.move, jLabelID, iXPos, iYPos);
-		this.cmd(act.setText, this.swapCountID, 'Swap Count: ' + ++this.swapCount);
-		this.cmd(act.step);
-		this.cmd(act.setText, this.arrayID[i], this.displayData[j]);
-		this.cmd(act.setText, this.arrayID[j], this.displayData[i]);
-		this.cmd(act.delete, iLabelID);
-		this.cmd(act.delete, jLabelID);
-
-		// Swap data in backend array
-		let temp = this.arrayData[i];
-		this.arrayData[i] = this.arrayData[j];
-		this.arrayData[j] = temp;
-
-		// Swap data in display array
-		temp = this.displayData[i];
-		this.displayData[i] = this.displayData[j];
-		this.displayData[j] = temp;
-
-		this.cmd(act.setForegroundColor, this.iPointerID, '#0000FF');
-		this.cmd(act.setForegroundColor, this.jPointerID, '#0000FF');
-		this.cmd(act.step);
-	}
-
 	disableUI() {
 		for (let i = 0; i < this.controls.length; i++) {
 			this.controls[i].disabled = true;
