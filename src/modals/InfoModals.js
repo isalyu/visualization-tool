@@ -265,6 +265,17 @@ const Modals = {
 			</li>
 		</ul>
 	),
+	FredSort: (
+		<ul>
+			<li>
+				First, split the array into √n partitions. Then, run Insertion Sort on each partition. Lastly, merge each partition together in sorted order, similar to MergeSort.
+			</li>
+			<li>
+				FredSort is an iterative sort created by our very own Professor <strong>Fred</strong>eric Faulkner.
+				It is generally worse than MergeSort for efficiency, but is a fun exercise for algorithmic analysis.
+			</li>
+		</ul>
+	)
 };
 
 export default Modals;

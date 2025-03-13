@@ -527,8 +527,8 @@
 				"example": "[(3<-5->9) (2<-3->null) (7<-9->11) (1<-2->null) (null) (6<-7->null) (10<-11->12)] add 8"
 			},
 			"best": {
-				"big_o": "O(log n)",
-				"explanation": "In a balanced tree, you have to traverse $log n$ nodes.",
+				"big_o": "O(1)",
+				"explanation": "$O(1)$ if adding the first node of the tree. Otherwise, in a balanced tree, you have to traverse $log n$ nodes.",
 				"example": "[(50<-100->200) (20<-50->80) (150<-200->250) (10<-20->30) (70<-80->90) (120<-150->180) (225<-250->null)] add 500"
 			}
 		},
@@ -544,8 +544,8 @@
 				"example": "[(-70<--20->10) (-100<--70->-50) (0<-10->null) (-200<--100->-80) (-60<--50->null) (-5<-0->5) (null)] remove -70 using predecessor"
 			},
 			"best": {
-				"big_o": "O(log n)",
-				"explanation": "In a balanced tree, you have to traverse $log n$ nodes.",
+				"big_o": "O(1)",
+				"explanation": "$O(1)$ if removing the last node in the tree. Otherwise, in a balanced tree, you have to traverse $log n$ nodes.",
 				"example": "[(-60<-0->10) (-100<--60->-20) (5<-10->53) (-120<--100->-90) (-40<--20->-1) (2<-5->7) (17<-53->54)] remove -90"
 			}
 		},
@@ -561,8 +561,8 @@
 				"example": "[(7<-17->31) (3<-7->11) (23<-31->41) (2<-3->null) (null<-11->13) (null<-23->29) (37<-41->null)] find 13"
 			},
 			"best": {
-				"big_o": "O(log n)",
-				"explanation": "In a balanced tree, you have to traverse $log n$ nodes.",
+				"big_o": "O(1)",
+				"explanation": "$O(1)$ if the root. Otherwise, in a balanced tree, you have to traverse at most $log n$ nodes.",
 				"example": "[(92<-2384->626433) (14<-92->653) (83279<-626433->9399375) (3<-14->15) (589<-653->793) (50288<-83279->419716) (1058209<-9399375->74944592)] find 3"
 			}
 		},
@@ -971,7 +971,7 @@
 		"Add": {
 			"worst": {
 				"big_o": "O(n)",
-				"explanation": "With unlucky coin flips, the SkipList can become a multi-layered LinkedList, so you have to traverse it like a LinkedList. There is $O(n)$ data to traverse once, then $O(log n) layers to go straight down, which simplifies to $O(n)$,",
+				"explanation": "With unlucky coin flips, the SkipList can become a multi-layered LinkedList, so you have to traverse it like a LinkedList. There is $O(n)$ data to traverse once, then $O(log n)$ layers to go straight down, which simplifies to $O(n)$,",
 				"example": "3,7,15,22|3,7,15,22|3,7,15,22|3,7,15,22 add 11 with 4 heads."
 			},
 			"average": {
@@ -988,7 +988,7 @@
 		"Remove": {
 			"worst": {
 				"big_o": "O(n)",
-				"explanation": "With unlucky coin flips, the SkipList can become a multi-layered LinkedList, so you have to traverse it like a LinkedList. There is $O(n)$ data to traverse once, then $O(log n) layers to go straight down, which simplifies to $O(n)$,",
+				"explanation": "With unlucky coin flips, the SkipList can become a multi-layered LinkedList, so you have to traverse it like a LinkedList. There is $O(n)$ data to traverse once, then $O(log n)$ layers to go straight down, which simplifies to $O(n)$,",
 				"example": "3,7,15,22|3,7,15,22|3,7,15,22|3,7,15,22 remove 15"
 			},
 			"average": {
@@ -1005,7 +1005,7 @@
 		"Find": {
 			"worst": {
 				"big_o": "O(n)",
-				"explanation": "With unlucky coin flips, the SkipList can become a multi-layered LinkedList, so you have to traverse it like a LinkedList. There is $O(n)$ data to traverse once, then $O(log n) layers to go straight down, which simplifies to $O(n)$,",
+				"explanation": "With unlucky coin flips, the SkipList can become a multi-layered LinkedList, so you have to traverse it like a LinkedList. There is $O(n)$ data to traverse once, then $O(log n)$ layers to go straight down, which simplifies to $O(n)$,",
 				"example": "3,7,15,22|3,7,15,22|3,7,15,22|3,7,15,22 find 22"
 			},
 			"average": {
@@ -1181,6 +1181,26 @@
 				"big_o": "O(n log n)",
 				"explanation": "Even in the best case, merge sort still recursively divides the array into halves (for a total of $log n$ levels) and merges each level (which is an $O(n)$ operation).",
 				"example": "[1, 2, 3, 4, 5, 6, 7, 8] still divides into 3 levels (log_2(8) = 3)"
+			}
+		}
+	},
+
+	"FredSort": {
+		"FredSort": {
+			"worst": {
+				"big_o": "O(n √n)",
+				"explanation": "The insertion sort portion has a time complexity of the length of the partition squared, which is $(√n)² = n$. This is done for each of the $√n$ partitions, so $O(n √n)$ work is done. Merging is also $O(n √n)$.",
+				"example": "[3, 2, 4, 1, 5] with 5 as the pivot"
+			},
+			"average": {
+				"big_o": "O(n √n)",
+				"explanation": "Best and worst case are both $O(n √n)$, so average is too.",
+				"example": "[3, 2, 4, 1, 5, 6] with 3 as the pivot"
+			},
+			"best": {
+				"big_o": "O(n √n)",
+				"explanation": "The insertion sort portion has a time complexity of just the length of the partition, which is $√n$. The merge portion is $O(n √n)$, thus the overall time complexity os $O(n √n)$.",
+				"example": "[3, 2, 4, 1, 5] with 3 as the pivot"
 			}
 		}
 	},
