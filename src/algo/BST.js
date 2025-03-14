@@ -28,6 +28,7 @@ import Algorithm, {
 	addControlToAlgorithmBar,
 	addDivisorToAlgorithmBar,
 	addGroupToAlgorithmBar,
+	addLabelToAlgorithmBar,
 	addRadioButtonGroupToAlgorithmBar,
 } from './Algorithm.js';
 import { act } from '../anim/AnimationMain';
@@ -164,6 +165,56 @@ export default class BST extends Algorithm {
 		this.succButton.onclick = () => (this.predSucc = 'succ');
 		this.succButton.checked = true;
 		this.predSucc = 'succ';
+
+		addDivisorToAlgorithmBar(); 
+
+		const imageUploadGroup = addGroupToAlgorithmBar(false); 
+		imageUploadGroup.classList.add('centered-vgroup'); 
+
+		addLabelToAlgorithmBar('Upload BST Image:', imageUploadGroup); 
+
+		this.imageFileInput = addControlToAlgorithmBar('input', '', imageUploadGroup); 
+		this.imageFileInput.type = 'file'; 
+		this.imageFileInput.accept = 'image/*'; 
+		this.imageFileInput.id = 'bstUploadFile'; 
+		this.imageFileInput.classList.add('bst-upload-file'); 
+		this.imageFileInput.onchange = this.handleImageUpload.bind(this); //TODO implement 
+		this.controls.push(this.imageFileInput); 
+
+		const uploadIcon = document.createElement('label'); 
+		uploadIcon.htmlFor = 'bstUploadFile'
+		uploadIcon.classList.add('bst-upload-icon-label'); 
+		uploadIcon.title = 'Click to upload an image'; 
+
+		imageUploadGroup.appendChild(uploadIcon); 
+
+		const uploadStatus = document.createElement('span'); 
+		uploadStatus.id = 'uploadStatus'; 
+		uploadStatus.classList.add('upload-status'); 
+		uploadStatus.textContent = ''; 
+		imageUploadGroup.appendChild(uploadStatus); 
+	}
+
+	handleImageUpload(event) {
+		const file = event.target.files[0]; 
+		if (!file) {
+			console.log('No file selected.'); 
+			return; 
+		}
+
+		const reader = new FileReader(); 
+		reader.onload = async (e) => {
+			const dataUrl = e.target.result; 
+			const base64String = dataUrl.split(',')[1]; 
+
+			const statusElement = document.getElementById('uploadStatus')
+			if (statusElement) {
+				statusElement.textContent = '✓'; 
+				statusElement.classList.add('upload-success'); 
+			}
+		}; 
+
+		reader.readAsDataURL(file); 
 	}
 
 	setURLData(searchParams) {

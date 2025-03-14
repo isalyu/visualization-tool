@@ -65,6 +65,10 @@
 }
 
 .VisualizationMainPage #toggles * {
+	display: flex; 
+	flex-direction: column; 
+	align-items: center; 
+	padding: 5px;
 	margin: 0 10px;
 	color: var(--primary);
 }
@@ -369,6 +373,54 @@ em {
 	box-shadow: 0 0 4px rgba(227, 37, 36, 0.7) !important;
 	filter: brightness(100%) !important;
 	pointer-events: none !important;
+}
+
+.bst-upload-file {
+	display: none; 
+}
+
+.bst-upload-icon-label {
+	display: block; 
+	width: 36px; 
+	height: 36px; 
+	cursor: pointer; 
+
+	background-image: url("../img/upload-image-icon.png"); 
+	background-repeat: no-repeat; 
+	background-position: center;
+	background-size: contain;
+
+	border: none; 
+	background-color: transparent; 
+	border-radius: 0; 
+	margin: 6px; 
+	transition: 0.2s filter; 
+}
+
+.bst-upload-icon-label:hover {
+	filter: var(--filter); 
+	transform: scale(1.25); 
+}
+
+.centered-vgroup {
+	display: flex; 
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.upload-status {
+	display: inline-block; 
+	margin-left: 6px; 
+	font-size: 18px; 
+	vertical-align: middle;
+	color: transparent; 
+}
+
+.upload-success {
+	color: green; 
+	font-weight: bold; 
+	transition: all 0.2s ease; 
 }
 
 input[type='radio'] {
