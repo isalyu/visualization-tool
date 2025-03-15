@@ -164,6 +164,45 @@ export default class BST extends Algorithm {
 		this.succButton.onclick = () => (this.predSucc = 'succ');
 		this.succButton.checked = true;
 		this.predSucc = 'succ';
+
+		addDivisorToAlgorithmBar();
+
+        // Image Upload Button
+        const imageUploadGroup = addGroupToAlgorithmBar(false);
+        imageUploadGroup.classList.add('centered-vgroup');
+
+        const uploadImageLabel = document.createElement('span');
+        uploadImageLabel.textContent = 'Upload BST:';
+        uploadImageLabel.classList.add('bst-upload-label');
+        imageUploadGroup.appendChild(uploadImageLabel);
+
+        this.imageFileInput = addControlToAlgorithmBar('input', '', imageUploadGroup);
+        this.imageFileInput.type = 'file';
+        this.imageFileInput.accept = 'image/*';
+        this.imageFileInput.id = 'bstUploadFile';
+        this.imageFileInput.classList.add('bst-upload-file');
+        this.imageFileInput.onchange = this.handleImageUpload.bind(this);
+        this.controls.push(this.imageFileInput);
+
+        const uploadIcon = document.createElement('label');
+        uploadIcon.htmlFor = 'bstUploadFile';
+        uploadIcon.classList.add('bst-upload-icon-label');
+        uploadIcon.title = 'Click to upload an image';
+
+        imageUploadGroup.appendChild(uploadIcon);
+
+        const uploadStatus = document.createElement('span');
+        uploadStatus.id = 'uploadStatus';
+        uploadStatus.classList.add('upload-status');
+        uploadStatus.textContent = '';
+        imageUploadGroup.appendChild(uploadStatus);
+
+        this.insertQueue = [];
+        this.animationManager.addListener(
+            'UpdateAndDrawComplete',
+            this,
+            this.onSingleInsertionEnded,
+        );
 	}
 
 	setURLData(searchParams) {
@@ -188,6 +227,61 @@ export default class BST extends Algorithm {
 		}
 	}
 
+	handleImageUpload(event) {
+		const file = event.target.files[0]; 
+		if (!file) {
+			console.log('No file selected.'); 
+			return; 
+		}
+
+		const reader = new FileReader(); 
+		reader.onload = async (e) => {
+			const dataUrl = e.target.result; 
+			const base64String = dataUrl.split(',')[1]; 
+
+			try {
+				const response = await fetch('https://bst-endpoint.vercel.app/api/bst', {
+					method: 'POST', 
+					headers: {
+						'Content-Type': 'application/json', 
+					},
+					body: JSON.stringify({ base64Image: base64String}),
+				}); 
+
+				const data = await response.json(); 
+				let uploadSuccess = false; 
+
+				if (data.result) {
+					uploadSuccess = this.insertListCallback(data.result); 
+				} else {
+					console.log('No BST values returned.'); 
+				}
+
+				const statusElement = document.getElementById('uploadStatus'); 
+				if (statusElement) {
+					statusElement.className = '';
+					if (uploadSuccess) {
+						statusElement.textContent = '✓'; 
+						statusElement.classList.add('upload-success'); 
+					} else {
+						statusElement.textContent = 'Invalid BST Image'; 
+						statusElement.classList.add('upload-failure'); 
+					}
+				}
+
+			} catch (err) {
+				console.log('Error Calling Vercel API: ', err); 
+				const statusElement = document.getElementById('uploadStatus');
+				if (statusElement) {
+					statusElement.textContent = 'Upload failed'; 
+					statusElement.classList.add('upload-failure');
+				}
+			}
+		}; 
+
+		reader.readAsDataURL(file); 
+	}
+
 	reset() {
 		this.nextIndex = 1;
 		this.treeRoot = null;
@@ -206,6 +300,43 @@ export default class BST extends Algorithm {
 			this.shake(this.insertButton);
 		}
 	}
+
+	insertListCallback(bstValueList) {
+        const addListString = bstValueList.trim();
+        if (!addListString) return false;
+
+        const itemsToAdd = addListString.split(',');
+
+        if (itemsToAdd.length === 1 && parseInt(itemsToAdd) === -1) {
+            return false;
+        }
+
+        const validNumberList = itemsToAdd.every(item => {
+            const trimmed = item.trim();
+            return trimmed !== '' && !Number.isNaN(Number(trimmed));
+        });
+
+        if (!validNumberList) return false;
+
+        this.insertQueue = itemsToAdd
+            .map(str => parseInt(str.trim(), 10))
+            .filter(val => !Number.isNaN(val) && Math.abs(val) <= 999);
+
+        if (this.insertQueue.length > 0) {
+            const val = this.insertQueue.shift();
+            this.implementAction(this.add.bind(this), val);
+        }
+
+        return true;
+    }
+
+    onSingleInsertionEnded() {
+        if (this.insertQueue.length > 0) {
+            const nextVal = this.insertQueue.shift();
+            this.implementAction(this.add.bind(this), nextVal);
+        }
+    }
+
 
 	deleteCallback() {
 		const deletedValue = this.deleteField.value;

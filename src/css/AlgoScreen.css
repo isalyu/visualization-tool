@@ -371,6 +371,61 @@ em {
 	pointer-events: none !important;
 }
 
+.bst-upload-file {
+    display: none;
+}
+
+.bst-upload-icon-label {
+    display: block;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+
+    background-image: url('../img/upload-image-icon.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+    border: none;
+    background-color: transparent;
+    border-radius: 0;
+    transition: 0.2s filter;
+}
+
+.bst-upload-icon-label:hover {
+    filter: var(--filter);
+    transform: scale(1.25);
+}
+
+.centered-vgroup {
+    align-items: center;
+}
+
+.bst-upload-label {
+    font-size: 0.9em; 
+  }
+
+.upload-status {
+    display: inline-block;
+    margin-left: 6px;
+    font-size: 18px;
+    vertical-align: middle;
+    color: transparent;
+}
+
+.upload-success {
+    color: green;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.upload-failure {
+    color: red;
+    font-weight: bold;
+    font-size: 0.8em;
+    transition: all 0.2s ease;
+}
+
 input[type='radio'] {
 	appearance: radio;
 	-moz-appearance: radio;
