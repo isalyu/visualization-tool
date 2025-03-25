@@ -100,6 +100,8 @@ export const algoList = [
 	'Dynamic Programming',
 	'LCS',
 	'Floyd',
+	'DropSort',
+	'FredSort',
 ];
 
 export const relatedSearches = {

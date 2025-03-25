@@ -186,7 +186,8 @@ export default class CocktailSort extends Algorithm {
 
 	exampleCallback() {
 		const selection = this.exampleDropdown.value;
-		this.exampleDropdown.options[0].text = this.exampleDropdown.options[this.exampleDropdown.selectedIndex].text;
+		this.exampleDropdown.options[0].text =
+			this.exampleDropdown.options[this.exampleDropdown.selectedIndex].text;
 		if (!selection) {
 			return;
 		}

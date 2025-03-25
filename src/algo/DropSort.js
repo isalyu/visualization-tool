@@ -158,7 +158,8 @@ export default class DropSort extends Algorithm {
 
 	exampleCallback() {
 		const selection = this.exampleDropdown.value;
-		this.exampleDropdown.options[0].text = this.exampleDropdown.options[this.exampleDropdown.selectedIndex].text;
+		this.exampleDropdown.options[0].text =
+			this.exampleDropdown.options[this.exampleDropdown.selectedIndex].text;
 		if (!selection) {
 			return;
 		}
@@ -292,11 +293,7 @@ export default class DropSort extends Algorithm {
 			this.movePointer(i);
 			this.cmd(act.step);
 			this.cmd(act.setText, this.infoLabelID, '');
-			this.cmd(
-				act.setText,
-				this.comparisonCountID,
-				'Comparison Count: ' + ++this.compCount,
-			);
+			this.cmd(act.setText, this.comparisonCountID, 'Comparison Count: ' + ++this.compCount);
 			this.cmd(act.step);
 			if (this.arrayData[i] < this.arrayData[i - 1]) {
 				// delete this data
@@ -308,7 +305,7 @@ export default class DropSort extends Algorithm {
 					const xpos = j * ARRAY_ELEM_WIDTH + ARRAY_START_X;
 					this.cmd(act.move, this.arrayID[j], xpos, ARRAY_START_Y);
 				}
-				i -= 1
+				i -= 1;
 				this.cmd(act.step);
 			}
 			this.cmd(act.setBackgroundColor, this.arrayID[i], '#2ECC71');
@@ -321,7 +318,11 @@ export default class DropSort extends Algorithm {
 	}
 
 	deleteData(i) {
-		this.cmd(act.setText, this.infoLabelID, 'Dropping ' + this.arrayData[i] + ' because it is less than ' + this.arrayData[i - 1]);
+		this.cmd(
+			act.setText,
+			this.infoLabelID,
+			'Dropping ' + this.arrayData[i] + ' because it is less than ' + this.arrayData[i - 1],
+		);
 		this.cmd(act.step);
 		this.cmd(act.delete, this.arrayID[i]);
 		this.cmd(act.step);
