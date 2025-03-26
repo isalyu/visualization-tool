@@ -118,9 +118,19 @@ export default class BubbleSort extends Algorithm {
 	}
 
 	setURLData(searchParams) {
-		const data = searchParams.get('data');
-		this.listField.value = data;
-		this.sortCallback();
+		if (searchParams.has("lastSwap")) {
+			const lastSwap = searchParams.get("lastSwap");
+			if (lastSwap === "0") {
+				this.toggleLastSwap();
+				this.lastSwapCheckbox.checked = false;
+			} 
+		}
+
+		if (searchParams.has("data")) {
+			const data = searchParams.get("data");
+			this.listField.value = data;
+			this.sortCallback();
+		}
 	}
 
 	setup() {

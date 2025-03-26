@@ -141,9 +141,24 @@ export default class SelectionSort extends Algorithm {
 	}
 
 	setURLData(searchParams) {
-		const data = searchParams.get('data');
-		this.listField.value = data;
-		this.sortCallback();
+		if (searchParams.has("type")) {
+			const type = searchParams.get("type");
+			if (type === "min") {
+				this.isMin = true;
+				this.minButton.checked = true;
+				this.maxButton.checked = false;
+			} else if (type === "max") {
+				this.isMin = false;
+				this.minButton.checked = false;
+				this.maxButton.checked = true;	
+			}
+		}
+
+		if (searchParams.has("data")) {
+			const data = searchParams.get("data");
+			this.listField.value = data;
+			this.sortCallback();
+		}
 	}
 
 	setup() {
