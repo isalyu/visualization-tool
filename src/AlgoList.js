@@ -1,11 +1,14 @@
 import * as algos from './algo';
 
 // After adding the export in algos/index.js, add new algorithms in the following format:
-// AlgorithmName: ['Menu Display Name', algos.ClassName, hasPseudoCode, 'Verbose Display Name (optional)']
+// AlgorithmName: ['Menu Display Name', algos.ClassName, hasPseudoCode, 'Verbose Display Name (optional)', 'Rainbow Color (optional)'],
 export const algoMap = {
-	NonLinearProbing: ['Non-Linear Probing', algos.NonLinearProbing],
-	LVA: ['LVA', algos.LVA],
-	BogoSort: ['Bogo Sort', algos.BogoSort],
+	NonLinearProbing: ['Non-Linear Probing', algos.NonLinearProbing, false, 'Non-Linear Probing', true],
+	LVA: ['LVA', algos.LVA, false, 'Landis-Velsky-Adelson Tree', true],
+	BogoSort: ['Bogo Sort', algos.BogoSort, false, 'Bogo Sort', true],
+	FredSort: ['Fred Sort', algos.FredSort, false, 'Fred Sort', true],
+	SleepSort: ['Sleep Sort', algos.SleepSort, false, 'Sleep Sort', true],
+	MiracleSort: ['Miracle Sort', algos.MiracleSort, false, 'Miracle Sort', true],
 	ArrayList: ['ArrayList', algos.ArrayList, true],
 	LinkedList: ['Singly LinkedList', algos.LinkedList, true],
 	DoublyLinkedList: ['Doubly LinkedList', algos.DoublyLinkedList, true],
@@ -33,9 +36,6 @@ export const algoMap = {
 	MergeSort: ['MergeSort', algos.MergeSort, true],
 	LSDRadix: ['LSD Radix Sort', algos.LSDRadix, true],
 	HeapSort: ['HeapSort', algos.HeapSort, true],
-	FredSort: ['FredSort', algos.FredSort, false],
-	SleepSort: ['SleepSort', algos.SleepSort, false],
-	MiracleSort: ['MiracleSort', algos.MiracleSort, false],
 	BruteForce: ['Brute Force', algos.BruteForce, true],
 	BoyerMoore: ['Boyer-Moore', algos.BoyerMoore, true],
 	KMP: ['KMP', algos.KMP, true],
@@ -67,16 +67,19 @@ export const algoList = [
 	'BST',
 	'Heap',
 	'AVL',
-	// 'LVA',
+	'LVA',
 	'BTree',
 	'SplayTree',
 	'SkipList',
 	'HashMaps',
 	'ClosedHash',
 	'OpenHash',
-	// 'NonLinearProbing',
+	'NonLinearProbing',
 	'Sorting and Quickselect',
-	// 'BogoSort',
+	'BogoSort',
+	'SleepSort',
+	'FredSort',
+	'MiracleSort',
 	'BubbleSort',
 	'CocktailSort',
 	'InsertionSort',
@@ -325,4 +328,20 @@ export const algoFilter = [
 		id: 'Floyd',
 		category: 'Dynamic Programming',
 	},
+	{
+		id: 'FredSort',
+		category: 'Sorting and Quickselect',
+	},
+	{
+		id: 'SleepSort',
+		category: 'Sorting and Quickselect',
+	},
+	{
+		id: 'MiracleSort',
+		category: 'Sorting and Quickselect',
+	},
+	{
+		id: 'DropSort',
+		category: 'Sorting and Quickselect',
+	}
 ];
