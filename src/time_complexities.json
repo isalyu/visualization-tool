@@ -1218,6 +1218,15 @@
 		}
 	},
 
+	"SleepSort": {
+		"SleepSort": {
+			"all cases": {
+				"big_o": "O(n)",
+				"explanation": "We copy each data item once into the new array. While this is a good time complexity, it is slow in practice since we have to wait for each element."
+			}
+		}
+	},
+
 	"LSDRadix": {
 		"LSDRadix": {
 			"worst": {
