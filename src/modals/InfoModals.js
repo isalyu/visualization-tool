@@ -275,6 +275,13 @@ const Modals = {
 				It is generally worse than MergeSort for efficiency, but is a fun exercise for algorithmic analysis.
 			</li>
 		</ul>
+	),
+	MiracleSort: (
+		<ul>
+			<li>
+				This sort does nothing to actively sort the data. It simply waits and hopes for a miracle to happen. Specifically, we are hoping that the bytes representing the memory locations of each element are flipped by some cosmic radiation such that the ordering of each element is modified into a sorted order.
+			</li>
+		</ul>
 	)
 };
 
