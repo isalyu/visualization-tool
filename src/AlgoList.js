@@ -34,6 +34,7 @@ export const algoMap = {
 	LSDRadix: ['LSD Radix Sort', algos.LSDRadix, true],
 	HeapSort: ['HeapSort', algos.HeapSort, true],
 	FredSort: ['FredSort', algos.FredSort, false],
+	DropSort: ['DropSort', algos.DropSort, false],
 	SleepSort: ['SleepSort', algos.SleepSort, false],
 	MiracleSort: ['MiracleSort', algos.MiracleSort, false],
 	BruteForce: ['Brute Force', algos.BruteForce, true],
@@ -101,6 +102,8 @@ export const algoList = [
 	'Dynamic Programming',
 	'LCS',
 	'Floyd',
+	'DropSort',
+	'FredSort',
 ];
 
 export const relatedSearches = {
