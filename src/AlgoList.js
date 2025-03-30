@@ -6,7 +6,7 @@ export const algoMap = {
 	NonLinearProbing: ['Non-Linear Probing', algos.NonLinearProbing, false, 'Non-Linear Probing', true],
 	LVA: ['LVA', algos.LVA, false, 'Landis-Velsky-Adelson Tree', true],
 	BogoSort: ['Bogo Sort', algos.BogoSort, false, 'Bogo Sort', true],
-  DropSort: ['DropSort', algos.DropSort, false],
+  	DropSort: ['Drop Sort', algos.DropSort, false, 'Drop Sort', true],
 	SleepSort: ['Sleep Sort', algos.SleepSort, false, 'Sleep Sort', true],
 	MiracleSort: ['Miracle Sort', algos.MiracleSort, false, 'Miracle Sort', true],
 	FredSort: ['Fred Sort', algos.FredSort, false, 'Fred Sort', true],
@@ -106,8 +106,6 @@ export const algoList = [
 	'Dynamic Programming',
 	'LCS',
 	'Floyd',
-	'DropSort',
-	'FredSort',
 ];
 
 export const relatedSearches = {
