@@ -139,6 +139,9 @@ export default class RabinKarp extends Algorithm {
 	}
 
 	setURLData(searchParams) {
+		this.textField.value = searchParams.get('text');
+		this.patternField.value = searchParams.get('pattern');
+		this.findCallback();
 		if (searchParams.has("base")) {
 			const base = parseInt(searchParams.get("base"));
 			if (Number.isInteger(base) && base > 0) {
@@ -214,7 +217,8 @@ export default class RabinKarp extends Algorithm {
 
 	exampleCallback() {
 		const selection = this.exampleDropdown.value;
-		this.exampleDropdown.options[0].text = this.exampleDropdown.options[this.exampleDropdown.selectedIndex].text;
+		this.exampleDropdown.options[0].text =
+			this.exampleDropdown.options[this.exampleDropdown.selectedIndex].text;
 		if (!selection) {
 			return;
 		}

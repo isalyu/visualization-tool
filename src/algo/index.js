@@ -41,5 +41,6 @@ export { default as StackLL } from './StackLL';
 export { default as HeapSort } from './HeapSort';
 export { default as MiracleSort } from './MiracleSort';
 export { default as FredSort } from './FredSort';
+export { default as DropSort } from './DropSort';
 export { default as SleepSort } from './SleepSort';
 export { default as CreateGraph } from './CreateGraph';
