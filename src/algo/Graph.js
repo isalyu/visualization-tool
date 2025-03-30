@@ -34,6 +34,7 @@ import Algorithm, {
 } from './Algorithm.js';
 import {
 	FLOYD_ADJ_LIST,
+	LARGE_ADJ_LIST,
 	LARGE_ALLOWED,
 	LARGE_CURVE,
 	LARGE_X_POS_LOGICAL,
@@ -388,7 +389,7 @@ export default class Graph extends Algorithm {
 		this.highlightCircleL = this.nextIndex++;
 		this.highlightCircleAL = this.nextIndex++;
 		this.highlightCircleAM = this.nextIndex++;
-		this.setup();
+		this.setup(LARGE_ADJ_LIST);
 	}
 
 	adjustCurveForDirectedEdges(curve, bidirectional) {

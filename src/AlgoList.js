@@ -35,6 +35,8 @@ export const algoMap = {
 	HeapSort: ['HeapSort', algos.HeapSort, true],
 	FredSort: ['FredSort', algos.FredSort, false],
 	DropSort: ['DropSort', algos.DropSort, false],
+	SleepSort: ['SleepSort', algos.SleepSort, false],
+	MiracleSort: ['MiracleSort', algos.MiracleSort, false],
 	BruteForce: ['Brute Force', algos.BruteForce, true],
 	BoyerMoore: ['Boyer-Moore', algos.BoyerMoore, true],
 	KMP: ['KMP', algos.KMP, true],

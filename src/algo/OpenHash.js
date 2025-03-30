@@ -146,6 +146,17 @@ export default class OpenHash extends Hash {
 		return this.commands;
 	}
 
+	setURLData(searchParams) {
+		if (searchParams.has("probeType")) {
+			const newProbeType = searchParams.get("probeType").trim()
+			if (newProbeType === 'linear' || newProbeType === 'quadratic' || newProbeType === 'double') {
+				this.probeTypeDropDown.value = newProbeType;
+				this.checkProbeType();
+			}
+		}
+		super.setURLData(searchParams);
+	}
+
 	randomCallback() {
 		const LOWER_BOUND = 0;
 		const UPPER_BOUND = 16;

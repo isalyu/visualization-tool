@@ -1210,6 +1210,28 @@
 			"all cases": {
 				"big_o": "O(n)",
 				"explanation": "We always iterate through the array one time. This is a great runtime, but comes with the consequence that we lose data, so it is not a true sort."
+      }
+    }
+  },
+  
+	"MiracleSort": {
+		"MiracleSort": {
+			"worst": {
+				"big_o": "O(∞)",
+				"explanation": "There is no function that bounds the interminable runtime of Miracle Sort. While O(∞) is not appropriate Big-O notation, it gets the idea across."
+			},
+			"best": {
+				"big_o": "O(n)",
+				"explanation": "If the bytes associated with each element's memory location are each flipped once, such that they are all put in the correct locations, this would be a linear runtime with respect to the number of elements."
+			}
+		}
+	},
+
+	"SleepSort": {
+		"SleepSort": {
+			"all cases": {
+				"big_o": "O(n)",
+				"explanation": "We copy each data item once into the new array. While this is a good time complexity, it is slow in practice since we have to wait for each element."
 			}
 		}
 	},
