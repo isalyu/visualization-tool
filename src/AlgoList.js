@@ -51,14 +51,18 @@ export const algoMap = {
 	Floyd: ['Floyd-Warshall', algos.Floyd],
 };
 
-export const algoList = [
+const aprilFoolsAlgos = [
 	'LVA',
 	'NonLinearProbing',
 	'DropSort',
 	'SleepSort',
 	'MiracleSort',
 	'BogoSort',
-	'FredSort',
+	'FredSort'
+];
+const isAprilFools = new Date().getMonth() === 3 && new Date().getDate() <= 2; // April 1st or 2nd
+export const algoList = [
+	...(isAprilFools ? aprilFoolsAlgos : []),
 	'Lists',
 	'ArrayList',
 	'LinkedList',
