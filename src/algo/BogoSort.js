@@ -27,6 +27,7 @@
 import Algorithm, {
 	addControlToAlgorithmBar,
 	addDivisorToAlgorithmBar,
+	addDropDownGroupToAlgorithmBar,
 	addGroupToAlgorithmBar,
 	addLabelToAlgorithmBar,
 } from './Algorithm.js';
@@ -79,6 +80,22 @@ export default class BogoSort extends Algorithm {
 		this.sortButton = addControlToAlgorithmBar('Button', 'Sort', horizontalGroup);
 		this.sortButton.onclick = this.sortCallback.bind(this);
 		this.controls.push(this.sortButton);
+
+		addDivisorToAlgorithmBar();
+		
+		// Examples dropdown
+		this.exampleDropdown = addDropDownGroupToAlgorithmBar(
+			[
+				['', 'Select Example'],
+				['1,2,3,4,5,6,7,8,9', 'Sorted'],
+				['9,8,7,6,5,4,3,2,1', 'Reverse Sorted'],
+				['2,3,4,5,6,7,8,9,1', 'Almost Sorted'],
+				['Random', 'Random'],
+			],
+			'Example',
+		);
+		this.exampleDropdown.onchange = this.exampleCallback.bind(this);
+		this.controls.push(this.exampleDropdown);
 
 		addDivisorToAlgorithmBar();
 
@@ -156,6 +173,34 @@ export default class BogoSort extends Algorithm {
 
 	clearCallback() {
 		this.implementAction(this.clear.bind(this));
+	}
+
+	exampleCallback() {
+		const selection = this.exampleDropdown.value;
+		this.exampleDropdown.options[0].text = this.exampleDropdown.options[this.exampleDropdown.selectedIndex].text;
+		if (!selection) {
+			return;
+		}
+
+		let values = '';
+		if (selection === 'Random') {
+			//Generate between 5 and 15 random values
+			const RANDOM_ARRAY_SIZE = Math.floor(Math.random() * 9) + 5;
+			const MIN_DATA_VALUE = 1;
+			const MAX_DATA_VALUE = 14;
+			for (let i = 0; i < RANDOM_ARRAY_SIZE; i++) {
+				values += (
+					Math.floor(Math.random() * (MAX_DATA_VALUE - MIN_DATA_VALUE)) + MIN_DATA_VALUE
+				).toString();
+				if (i < RANDOM_ARRAY_SIZE - 1) {
+					values += ',';
+				}
+			}
+		} else {
+			values = selection;
+		}
+		this.exampleDropdown.value = '';
+		this.listField.value = values;
 	}
 
 	clear() {
